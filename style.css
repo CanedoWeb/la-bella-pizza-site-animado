@@ -1,0 +1,635 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    background-color: #F3F3F3;
+}
+
+
+/* Header & Navbar - Sem fundo! */
+.header {
+    width: 100%;
+    padding: 24px 80px;
+    background: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    .nav-container {
+        max-width: 1440px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        .nav-link {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .logo {
+                height: 100px;
+                object-fit: contain;
+            }
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            background-color: #ffffff;
+            color: #000000;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 12px 32px;
+            border-radius: 40px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            }
+        }
+    }
+}
+
+/* Hero Section Styles */
+.hero-section {
+    padding: 50px 0;
+    background-image: url(assets/img/bg\ hero.webp);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    width: 100%;
+    min-height: 110vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-top: 100px;
+
+    /* Faint Watermark Logo */
+    .hero-watermark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.04;
+        width: 90%;
+        max-width: 1200px;
+        pointer-events: none;
+        z-index: 1;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .hero-container {
+        max-width: 1600px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 80px;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        z-index: 10;
+    }
+
+    /* Left Column */
+    .hero-left {
+        width: 35%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .pizza-title {
+            font-family: "Damion", cursive;
+            font-weight: 100;
+            font-size: 70px;
+            /* Tamanho equilibrado para caber em uma linha */
+            color: #ffffff;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            height: 110px;
+            /* Altura fixa para evitar o 'pulo' do layout */
+            display: flex;
+            align-items: center;
+            /* Centraliza verticalmente no espaço reservado */
+            overflow: hidden;
+            /* Máscara para as linhas do SplitType */
+        }
+
+        .pizza-desc {
+            font-family: "Poppins", sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 90%;
+            margin-bottom: 40px;
+            overflow: hidden;
+            /* Máscara para as linhas do SplitType */
+        }
+
+        .order-btn {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: "clash", "Poppins", sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 16px 32px;
+            border-radius: 40px;
+            border: none;
+            cursor: pointer;
+            width: fit-content;
+            margin-bottom: 80px;
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+            }
+        }
+
+        .slider-arrows {
+            display: flex;
+            gap: 16px;
+
+            .arrow-btn {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.2);
+                border: none;
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                backdrop-filter: blur(4px);
+                transition: background 0.3s ease;
+
+                &:hoher {
+                    background: rgba(255, 255, 255, 0.4);
+                }
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+    }
+
+    /* Center Column (Absolute Overlay) */
+    .hero-center {
+        height: 90%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        pointer-events: none;
+
+        .pizza-main-img {
+            width: 500px;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 50px 30px rgba(0, 0, 0, 0.5));
+            pointer-events: auto;
+            transform: rotate(-18.857deg);
+        }
+
+        .slider-dots {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+            pointer-events: auto;
+
+            .dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.4);
+                cursor: pointer;
+                transition: background 0.3s ease, width 0.3s ease;
+
+                &.active {
+                    background: #ffffff;
+                    width: 24px;
+                    border-radius: 10px;
+                }
+            }
+        }
+    }
+
+    /* Right Column */
+    .hero-right {
+        width: 32%;
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+        justify-content: center;
+        align-items: center;
+
+        .features-title {
+            font-family: "Damion", cursive;
+            font-weight: 100;
+            font-size: 40px;
+            color: #ffffff;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            row-gap: 20px;
+            justify-items: center;
+            width: 100%;
+
+            .feature-item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                color: #ffffff;
+
+                span {
+                    font-family: "Poppins", sans-serif;
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 1.2;
+                    opacity: 0.9;
+                    width: 80px;
+                    /* Largura padrão para todos */
+                    height: 50px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: left;
+                    /* Garante que o texto comece sempre do mesmo ponto após o ícone */
+                }
+
+                .feature-icon {
+                    width: 24px;
+                    height: 24px;
+                    object-fit: contain;
+
+                    &.wine-icon,
+                    &.sauce-icon {
+                        width: 32px;
+                        height: 32px;
+                    }
+                }
+            }
+        }
+    }
+
+    /* Placeholder for the green curve at the bottom */
+    .green-curve-placeholder {
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        pointer-events: none;
+        z-index: 5;
+
+        .bottom-green-curve {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+    }
+
+}
+
+.svg-section {
+    height: 150px;
+    position: relative;
+    top: -5vw;
+    left: 0;
+    z-index: 900;
+}
+
+
+/* SplitType Helper Classes */
+.line-mask {
+    overflow: hidden;
+    line-height: 1.2;
+}
+
+.linha-svg text {
+    mix-blend-mode: overlay;
+    fill: #ffffff;
+    font-size: 80px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    user-select: none;
+}
+
+.crossfade-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+}
+
+.crossfade-wrapper>div {
+    grid-row: 1;
+    grid-column: 1;
+    width: 100%;
+}
+
+/* --- Componentes Globais / Cards Reutilizáveis --- */
+
+.section-title {
+    font-family: "Damion", cursive;
+    font-size: 80px;
+    font-weight: 100;
+    color: #333333;
+    text-align: center;
+    margin-bottom: 90px;
+    /* Espaço para o "overflow" da imagem da pizza */
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    gap: 120px;
+    padding: 20px;
+    max-width: 1200px;
+    /* Reduzi o limite da largura total */
+    margin: 0 auto;
+}
+
+.card {
+    position: relative;
+    border-radius: 30px;
+    padding: 0 18px 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+    /* Abre espaço no topo do card pro overlay da imagem */
+}
+
+.card-img-wrapper {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.card-pizza-img {
+    width: 200px;
+    /* Reduzi de 250px */
+    height: 200px;
+    object-fit: contain;
+    position: absolute;
+    top: -100px;
+    /* Ajustado para a nova escala */
+    filter: drop-shadow(0 20px 20px rgba(0, 0, 0, 0.35));
+    transition: transform 0.4s ease;
+}
+
+.card:hover .card-pizza-img {
+    transform: scale(1.05) rotate(5deg);
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.card-title {
+    font-family: "Damion", cursive;
+    font-size: 32px;
+    /* Reduzi de 40px */
+    font-weight: 100;
+    margin: 10px 0;
+}
+
+.card-desc {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    opacity: 0.9;
+    max-width: 80%;
+}
+
+.card-btn {
+    display: inline-block;
+    padding: 10px 32px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: auto;
+}
+
+.card-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Modificadores de Cores (Themes) */
+.card-green {
+    background-color: #64B95F;
+    color: #ffffff;
+}
+
+.card-green .card-btn {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+.card-red {
+    background-color: #DE4E45;
+    color: #ffffff;
+}
+
+.card-red .card-btn {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+.card-white {
+    background-color: #ffffff;
+    color: #333333;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+}
+
+.card-white .card-desc {
+    color: #666666;
+}
+
+.card-white .btn-outline {
+    background-color: transparent;
+    border: 1px solid #DE4E45;
+    color: #333333;
+}
+
+.card-white .btn-outline:hover {
+    background-color: #DE4E45;
+    color: #ffffff;
+}
+
+/* --- Momento Section --- */
+.momento {
+    padding: 60px 0 200px;
+    background-color: #F3F3F3;
+}
+
+
+/* --- Cardápio Section --- */
+.cardapio-container {
+    padding: 60px 0 200px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .cards-grid {
+        grid-template-columns: repeat(3, 2fr);
+    }
+
+    .card-content p {
+        font-size: 40px;
+        font-weight: 600;
+    }
+
+    .btn-all-pizzas {
+        background-color: #ffffff;
+        color: #212121;
+        margin-top: 50px;
+        font-size: 20px;
+        font-weight: 500;
+        width: auto;
+        padding: 20px 32px;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+        border: #DE4E45 2px solid;
+    }
+}
+
+/* --- promocao Section --- */
+.promocao {
+    position: relative;
+    padding: 100px 0;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 50px;
+
+    .promocao-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill; /* Garante que as curvas preencham a largura */
+        }
+    }
+
+    .promocao-container {
+        max-width: 1300px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .esquerda {
+        width: 55%;
+        color: #ffffff;
+        z-index: 2;
+
+        .promocao-title {
+            font-family: "Damion", cursive;
+            font-size: 84px;
+            font-weight: 100;
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+
+        .promocao-desc {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.4;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            max-width: 450px;
+        }
+
+        .promocao-price {
+            font-size: 96px;
+            font-weight: 700;
+            font-family: "Poppins", sans-serif;
+            line-height: 1;
+        }
+    }
+
+    .direita {
+        width: 45%;
+        display: flex;
+        justify-content: flex-end;
+        position: relative;
+        z-index: 2;
+
+        .promocao-pizza-img {
+            width: 120%; /* Faz a pizza parecer maior e "sair" um pouco */
+            max-width: 650px;
+            height: auto;
+            filter: drop-shadow(0 40px 40px rgba(0, 0, 0, 0.45));
+            transition: transform 0.6s cubic-bezier(0.2, 0, 0.2, 1);
+        }
+
+        &:hover .promocao-pizza-img {
+            transform: scale(1.05) rotate(5deg);
+        }
+    }
+}
