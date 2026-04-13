@@ -318,31 +318,20 @@ body {
         width: 100%;
         pointer-events: none;
         z-index: 5;
-
-        .bottom-green-curve {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
     }
 
 }
 
 .svg-section {
-    height: 150px;
+    height: 60px;
+    /* Reduzi a altura para não empurrar muito o conteúdo */
     position: relative;
     top: -5vw;
     left: 0;
     z-index: 900;
 }
 
-
 /* SplitType Helper Classes */
-.line-mask {
-    overflow: hidden;
-    line-height: 1.2;
-}
-
 .linha-svg text {
     mix-blend-mode: overlay;
     fill: #ffffff;
@@ -549,12 +538,13 @@ body {
 
 /* --- promocao Section --- */
 .promocao {
+    z-index: 2;
     position: relative;
     padding: 100px 0;
     min-height: 600px;
     display: flex;
     align-items: center;
-    overflow: hidden;
+    /* overflow: hidden; Removido para a pizza poder vazar para cima/baixo */
     margin-bottom: 50px;
 
     .promocao-bg {
@@ -568,7 +558,7 @@ body {
         img {
             width: 100%;
             height: 100%;
-            object-fit: fill; /* Garante que as curvas preencham a largura */
+            object-fit: fill;
         }
     }
 
@@ -581,6 +571,7 @@ body {
         justify-content: space-between;
         align-items: center;
         gap: 40px;
+        position: relative;
     }
 
     .esquerda {
@@ -614,22 +605,834 @@ body {
     }
 
     .direita {
-        width: 45%;
-        display: flex;
-        justify-content: flex-end;
-        position: relative;
+        position: absolute;
+        right: -300px;
+        /* Puxa o quadro para fora do container cortando metade da tela */
+        top: 25%;
+        transform: translateY(-50%);
         z-index: 2;
 
         .promocao-pizza-img {
-            width: 120%; /* Faz a pizza parecer maior e "sair" um pouco */
-            max-width: 650px;
+            width: 900px;
+            max-width: none;
             height: auto;
-            filter: drop-shadow(0 40px 40px rgba(0, 0, 0, 0.45));
+            filter: drop-shadow(-20px 20px 40px rgba(0, 0, 0, 0.45));
             transition: transform 0.6s cubic-bezier(0.2, 0, 0.2, 1);
-        }
-
-        &:hover .promocao-pizza-img {
-            transform: scale(1.05) rotate(5deg);
+            transform: rotate(-45deg);
+            /* Angulação natural */
         }
     }
+}
+
+/* --- Sobre Section --- */
+.sobre {
+    padding: 100px 0;
+    background-color: #F3F3F3;
+}
+
+.sobre-main-title {
+    font-family: "Damion", cursive;
+    font-size: 84px;
+    font-weight: 100;
+    text-align: center;
+    color: #333333;
+    margin-bottom: 80px;
+}
+
+.sobre-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 4fr 4fr;
+    gap: 60px;
+    align-items: stretch;
+    /* Alinha a altura das duas colunas */
+}
+
+.sobre-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.sobre-title {
+    font-family: "Damion", cursive;
+    font-size: 44px;
+    font-weight: 100;
+    color: #333333;
+    text-align: right;
+    margin-bottom: 30px;
+}
+
+.sobre-text {
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #333333;
+    text-align: right;
+    margin-bottom: 50px;
+    opacity: 0.9;
+}
+
+.sobre-img-small {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin-top: auto;
+    /* Empurra pra baixo para preencher o espacamento residual se houver */
+}
+
+.sobre-right {
+    height: 100%;
+}
+
+.sobre-img-large {
+    width: 100%;
+    height: 100%;
+    /* Fixa para crescer junto com a outra coluna inteira */
+    min-height: 600px;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* --- CTA Button: Pe�a em 3 Cliques --- */
+.sobre-cta {
+    display: flex;
+    justify-content: center;
+    margin: 200px 0;
+}
+
+.btn-peca-cliques {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    background-color: #DE4E45;
+    border-radius: 60px;
+    padding: 14px 40px 14px 14px;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 30px rgba(222, 78, 69, 0.35);
+}
+
+.btn-peca-cliques:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 16px 40px rgba(222, 78, 69, 0.5);
+}
+
+.btn-peca-cliques .btn-logo {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.btn-peca-cliques span {
+    font-family: "Damion", cursive;
+    font-size: 52px;
+    font-weight: 100;
+    color: #ffffff;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+
+/* --- Nossos Clientes Section --- */
+.clientes {
+    position: relative;
+    padding: 100px 0 0;
+    background-color: #F3F3F3;
+    overflow: hidden;
+    text-align: center;
+}
+
+.clientes-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.clientes-title {
+    font-family: "Damion", cursive;
+    font-size: 84px;
+    font-weight: 100;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+.clientes-subtitle {
+    font-size: 18px;
+    color: #555555;
+    margin-bottom: 80px;
+}
+
+/* Slider */
+.testimonials-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    min-height: 200px;
+    margin-bottom: 80px;
+}
+
+.testimonial-track {
+    flex: 1;
+    position: relative;
+    min-height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.testimonial-slide {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    padding: 0 20px;
+}
+
+/* Estrelas */
+.stars-row {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 20px;
+}
+
+.star {
+    font-size: 28px;
+}
+
+.star-filled {
+    color: #DE4E45;
+}
+
+.star-empty {
+    color: #cccccc;
+}
+
+/* Texto e autor */
+.testimonial-text {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #333333;
+    max-width: 500px;
+    margin: 0 auto 16px;
+}
+
+.testimonial-author {
+    font-size: 14px;
+    font-weight: 600;
+    color: #888888;
+    letter-spacing: 1px;
+}
+
+/* Bot�es de navega��o */
+.testimonial-btn {
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: #DE4E45;
+    cursor: pointer;
+    padding: 8px 16px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.testimonial-btn:hover {
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+
+/* Wave decorativa no fundo */
+.clientes-wave {
+    width: 100%;
+    line-height: 0;
+
+    img {
+        width: 100%;
+        display: block;
+        transform: rotate(180deg);
+        /* Inverte para ficar como onda de baixo */
+    }
+}
+
+
+/* Estrelas SVG - Bandeira Italiana */
+.star-svg {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+
+/* ===================================
+   FOOTER
+   =================================== */
+.footer {
+    position: relative;
+    background-color: #DE4E45;
+    color: #ffffff;
+}
+
+/* Onda no topo */
+.footer-wave {
+    width: 100%;
+    line-height: 0;
+    margin-bottom: -2px;
+
+    img {
+        width: 100%;
+        display: block;
+    }
+}
+
+/* Corpo */
+.footer-body {
+    padding: 60px 80px 80px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.footer-tagline {
+    font-family: "Damion", cursive;
+    font-size: 56px;
+    font-weight: 100;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+/* Grid 3 colunas */
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Coluna 1: Navega��o */
+.footer-nav-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.footer-nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-nav ul li a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 15px;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.footer-nav ul li a:hover {
+    color: #ffffff;
+    padding-left: 6px;
+}
+
+/* Coluna 2: Logo */
+.footer-logo-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-logo {
+    width: 180px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+}
+
+/* Coluna 3: CTA */
+.footer-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 14px;
+}
+
+.footer-cta-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 6px;
+    align-self: flex-end;
+}
+
+.footer-btn {
+    display: inline-block;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    padding: 12px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+}
+
+.footer-btn:hover {
+    background-color: #ffffff;
+    color: #DE4E45;
+}
+
+/* Barra inferior */
+.footer-bar {
+    background-color: rgba(0, 0, 0, 0.18);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 24px 80px;
+}
+
+.footer-bar-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.4;
+}
+
+.footer-info strong {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.footer-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: brightness(0) invert(1);
+}
+
+
+/* ===================================
+   FOOTER
+   =================================== */
+.footer {
+    position: relative;
+    color: #ffffff;
+    background-image: url("assets/img/bg footer.webp");
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+
+/* Corpo */
+.footer-body {
+    padding: 80px 80px 60px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.footer-tagline {
+    font-family: "Damion", cursive;
+    font-size: 56px;
+    font-weight: 100;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+/* Grid 3 colunas */
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Coluna 1: Navega��o */
+.footer-nav-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.footer-nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-nav ul li a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 15px;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.footer-nav ul li a:hover {
+    color: #ffffff;
+    padding-left: 6px;
+}
+
+/* Coluna 2: Logo */
+.footer-logo-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-logo {
+    width: 180px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+/* Coluna 3: CTA */
+.footer-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 14px;
+}
+
+.footer-cta-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 6px;
+    align-self: flex-end;
+}
+
+.footer-btn {
+    display: inline-block;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    padding: 12px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+}
+
+.footer-btn:hover {
+    background-color: #ffffff;
+    color: #DE4E45;
+}
+
+/* Barra inferior */
+.footer-bar {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 24px 80px;
+}
+
+.footer-bar-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.4;
+}
+
+.footer-info strong {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.footer-icon-emoji {
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+
+/* ===================================
+   FOOTER (estrutura do user)
+   =================================== */
+footer {
+    position: relative;
+    color: #ffffff;
+    overflow: hidden;
+    /* Garante que o bg absoluto nao vaze */
+}
+
+/* BG absoluto cobrindo todo o footer */
+.bg-footer {
+    position: absolute;
+    inset: 0;
+    /* top:0 right:0 bottom:0 left:0 */
+    z-index: 0;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        display: block;
+    }
+}
+
+/* container relativo pra ficar sobre o bg */
+.footer-container {
+    position: relative;
+    z-index: 1;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 80px;
+}
+
+/* Tagline */
+.footer-title {
+    font-family: "Damion", cursive;
+    font-size: 56px;
+    font-weight: 100;
+    color: #ffffff;
+    text-align: center;
+    padding: 70px 0 60px;
+}
+
+/* Footer content flex column */
+.footer-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Grid das 3 colunas */
+.footer-content .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+    padding-bottom: 50px;
+}
+
+/* Coluna esquerda - nav */
+.footer-content .left h4,
+.footer-content .right h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 18px;
+}
+
+.footer-content .left ul,
+.footer-content .right ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-content .left ul li a,
+.footer-content .right ul li a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 15px;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.footer-content .left ul li a:hover {
+    color: #ffffff;
+    padding-left: 6px;
+}
+
+/* Coluna do meio - logo */
+.footer-content .middle {
+    display: flex;
+    justify-content: center;
+
+    img {
+        width: 160px;
+        height: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.3));
+    }
+}
+
+/* Coluna direita - botoes CTA como lista */
+.footer-content .right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.footer-content .right ul {
+    align-items: flex-end;
+}
+
+.footer-content .right ul li a {
+    display: inline-block;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    padding: 11px 26px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.footer-content .right ul li a:hover {
+    background-color: #ffffff;
+    color: #DE4E45;
+    padding-left: 26px;
+    /* Override do hover generico */
+}
+
+/* Barra inferior com border-top */
+.footer-content .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 24px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.footer-content .bottom strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.footer-content .bottom .telefone,
+.footer-content .bottom .endereco,
+.footer-content .bottom .horario {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.4;
+}
+
+
+/* ===================================
+   SVG LINE ANIMATION
+   =================================== */
+
+/* O wrapper precisa de position relative para o absolute do SVG funcionar */
+main {
+    position: relative;
+    overflow-x: hidden;
+}
+
+.svg-line-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+}
+
+.svg-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+}
+
+/* Garante que cards fiquem acima da linha */
+.card,
+.momento-container,
+.cardapio-container,
+.sobre-container,
+.sobre-cta,
+.momento.processo .momento-container,
+.clientes-container,
+.promocao-container {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* ===================================
+   SVG LINE ANIMATION
+   =================================== */
+
+/* main precisa ser relativo para o SVG absoluto funcionar */
+main {
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* SVG direto dentro de main: centralizado horizontalmente */
+
+
+/* Cards e containers ficam acima da linha */
+.card,
+.momento-container,
+.cardapio-container,
+.sobre-container,
+.sobre-cta,
+.clientes-container,
+.promocao-container {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* content-wrapper: o novo container relativo das se��es para a svg line rodar dentro */
+.content-wrapper {
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Ocultar overflow-x do main original para garantir */
+main {
+    overflow-x: hidden;
+}
+
+/* SVG da cobra animada: centralizada e cobrindo todo o content-wrapper */
+.content-wrapper > svg {
+    position: absolute;
+    top: 0px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;      /* Pode aumentar aqui livremente agora */
+    height: 96%;      /* IMPORTANTE: auto permite que a largura cresça sem travar na altura *//* Garante que cubra a altura toda do wrap */
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden; 
 }
