@@ -15,13 +15,15 @@ body {
 
 /* Header & Navbar - Sem fundo! */
 .header {
-    width: 100%;
-    padding: 24px 80px;
-    background: transparent;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 100;
+    background: #dc4e44c2;
+    width: 90%;
+    padding: 8px 80px;
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    border-radius: 100px;
 
     .nav-container {
         max-width: 1440px;
@@ -49,7 +51,7 @@ body {
             justify-content: center;
 
             .logo {
-                height: 100px;
+                height: 70px;
                 object-fit: contain;
             }
         }

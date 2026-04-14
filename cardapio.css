@@ -1,0 +1,17 @@
+.tamanhos-preco {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    .card{
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .card:nth-child{
+        padding: 0;
+        margin: 0;
+    }
+}
