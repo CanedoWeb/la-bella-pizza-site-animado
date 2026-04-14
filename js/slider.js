@@ -1,11 +1,12 @@
 // Registrar o plugin CustomEase do GSAP para uso do bezier customizado.
 document.addEventListener("DOMContentLoaded", (event) => {
-    gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, CustomEase, CustomBounce)
+    // Registrar todos os plugins (Agora gratuitos via CDN!)
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, CustomEase, CustomBounce);
 
     // Curva Exponencial Besizer solicitada: 0.78, 0, 0.23, 1
     CustomEase.create("customBezier", "M0,0 C0.78,0 0.23,1 1,1");
 
-    // Dataset das pizzas exatamente com a ordem pedida
+    // ... (rest of the data remains the same)
     const slidesData = [
         {
             title: "Calabresa",

@@ -1,6 +1,6 @@
-gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener("DOMContentLoaded", () => {
+    gsap.registerPlugin(ScrollTrigger);
     const path = document.getElementById("stroke-path");
     if (!path) return;
 
