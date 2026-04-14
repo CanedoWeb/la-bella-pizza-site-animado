@@ -1,6 +1,6 @@
 // Registrar o plugin CustomEase do GSAP para uso do bezier customizado.
 document.addEventListener("DOMContentLoaded", (event) => {
-    gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, CustomEase, CustomBounce)
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, CustomEase)
 
     // Curva Exponencial Besizer solicitada: 0.78, 0, 0.23, 1
     CustomEase.create("customBezier", "M0,0 C0.78,0 0.23,1 1,1");
