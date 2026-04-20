@@ -9,7 +9,54 @@
     <link rel="stylesheet" href="cardapio.css">
 </head>
 
-<body>
+<body class="menu-page">
+
+    <div class="models">
+        <div class="card">
+            <div class="card-img-wrapper">
+                <img src="" alt="" class="card-pizza-img">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">--</h3>
+                <p class="card-price">R$ --</p>
+                <a href="#pedido" class="card-btn">Pedir</a>
+            </div>
+        </div>
+
+        <div class="cart--item">
+            <img src="" />
+            <div class="cart--item-nome">--</div>
+            <div class="cart--item--qtarea">
+                <button class="cart--item-qtmenos">-</button>
+                <div class="cart--item--qt">1</div>
+                <button class="cart--item-qtmais">+</button>
+            </div>
+        </div>
+    </div>
+
+    <aside>
+        <div class="cart--area">
+            <div class="menu-closer">❌</div>
+            <h1>Suas Pizzas</h1>
+            <div class="cart"></div>
+            <div class="cart--details">
+                <div class="cart--totalitem subtotal">
+                    <span>Subtotal</span>
+                    <span>R$ --</span>
+                </div>
+                <div class="cart--totalitem desconto">
+                    <span>Desconto</span>
+                    <span>R$ --</span>
+                </div>
+                <div class="cart--totalitem total big">
+                    <span>Total</span>
+                    <span>R$ --</span>
+                </div>
+                <div class="cart--finalizar">Finalizar a compra</div>
+            </div>
+        </div>
+    </aside>
+
     <header class="header">
         <nav class="nav-container">
             <a href="#inicio" class="nav-link">Início</a>
@@ -17,216 +64,123 @@
             <a href="#promocoes" class="nav-link">Promoções</a>
 
             <a href="#home" class="logo-link">
-                <!-- Using the existing logo asset -->
                 <img src="assets/img/logo.webp" alt="La Bella Pizza" class="logo">
             </a>
 
             <a href="#sobre" class="nav-link">Sobre</a>
             <a href="#contato" class="nav-link">Contato</a>
-            <a href="#pedido" class="nav-btn">Escolher Pizza</a>
+            <div class="nav-actions">
+                <div class="search-openner">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </div>
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="Qual pizza você busca?">
+                    <div class="search-closer">&times;</div>
+                </div>
+
+                <div class="menu-openner">
+                    <span>0</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                </div>
+            </div>
         </nav>
     </header>
     <main>
         <section class="cardapio">
             <div class="cardapio-container">
                 <h2 class="section-title">Cardápio</h2>
-                <div class="tamanhos-preco">
-                    <div class="card card-red">
-                        
-                        <div class="card-content">
-                            <h3 class="card-title">Média 30cm</h3>
-                            <p class="card-desc">R$69</p>
-                        </div>
-                    </div>
-                    <div class="card card-red">
-                        
-                        <div class="card-content">
-                            <h3 class="card-title">Grande 35cm</h3>
-                            <p class="card-desc">R$69</p>
-                        </div>
-                    </div>
-                    <div class="card card-red">
-                        
-                        <div class="card-content">
-                            <h3 class="card-title">Super 40cm</h3>
-                            <p class="card-desc">R$69</p>
-                        </div>
-                    </div>
-                    <div class="card card-red">
-                        
-                        <div class="card-content">
-                            <h3 class="card-title">Max 45cm</h3>
-                            <p class="card-desc">R$69</p>
-                        </div>
-                    </div>
+                <div class="category-buttons-box">
+                    <div class="category-button pizzas-tradicionais" data-filter ='all'>Todos</div>
+                    <div class="category-button pizzas-tradicionais" data-filter ='pizzas-tradicionais'>Tradicionais</div>
+                    <div class="category-button pizzas-doces" data-filter ='pizzas-doces'>DOces</div>
+                    <div class="category-button pizzas-gourmet" data-filter ='pizzas-gourmet'>Gourmet</div>
+                    <div class="category-button combos" data-filter ='combos'>Combos</div>
+                    <div class="category-button bebidas" data-filter ='bebidas'>Bebidas</div>
                 </div>
                 <div class="cards-grid">
-                    <!-- Card 1: Verde -->
-
-
-                    <div class="card card-green">
-                        <div class="card-img-wrapper">
-                            <img src="assets/img/pizza calabresa.png" alt="Pizza Calabresa" class="card-pizza-img">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Calabresa</h3>
-                            <p class="card-desc">R$69</p>
-                            <a href="#pedido" class="card-btn">Pedir</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 2: Branco -->
-                    <div class="card card-white">
-                        <div class="card-img-wrapper">
-                            <img src="assets/img/pizza brasileira.png" alt="Pizza Brasileira" class="card-pizza-img">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Frango com Catupiry</h3>
-                            <p class="card-desc">R$69</p>
-                            <a href="#pedido" class="card-btn">Pedir</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 3: Vermelho -->
-                    <div class="card card-red">
-                        <div class="card-img-wrapper">
-                            <img src="assets/img/pizza frango catupiry.webp" alt="Pizza Frango com Catupiry"
-                                class="card-pizza-img">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Quatro Queijos</h3>
-                            <p class="card-desc">R$69</p>
-                            <a href="#pedido" class="card-btn">Pedir</a>
-                        </div>
-                    </div>
-                    <div class="card card-red">
-                        <div class="card-img-wrapper">
-                            <img src="assets/img/pizza frango catupiry.webp" alt="Pizza Frango com Catupiry"
-                                class="card-pizza-img">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Brasileiras</h3>
-                            <p class="card-desc">R$69</p>
-                            <a href="#pedido" class="card-btn">Pedir</a>
-                        </div>
-                    </div>
-                    <div class="card card-green">
-                        <div class="card-img-wrapper">
-                            <img src="assets/img/pizza calabresa.png" alt="Pizza Calabresa" class="card-pizza-img">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Carne seca</h3>
-                            <p class="card-desc">R$69</p>
-                            <a href="#pedido" class="card-btn">Pedir</a>
-                        </div>
-                    </div>
-                    <div class="card card-white">
-                        <div class="card-img-wrapper">
-                            <img src="assets/img/pizza brasileira.png" alt="Pizza Brasileira" class="card-pizza-img">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Peperoni</h3>
-                            <p class="card-desc">R$69</p>
-                            <a href="#pedido" class="card-btn">Pedir</a>
-                        </div>
-                    </div>
-                    <div class="card card-red">
-                        <div class="card-img-wrapper">
-                            <img src="assets/img/pizza frango catupiry.webp" alt="Pizza Frango com Catupiry"
-                                class="card-pizza-img">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Brasileiras</h3>
-                            <p class="card-desc">R$69</p>
-                            <a href="#pedido" class="card-btn">Pedir</a>
-                        </div>
-                    </div>
-                    <div class="card card-white">
-                        <div class="card-img-wrapper">
-                            <img src="assets/img/pizza brasileira.png" alt="Pizza Brasileira" class="card-pizza-img">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Peperoni</h3>
-                            <p class="card-desc">R$69</p>
-                            <a href="#pedido" class="card-btn">Pedir</a>
-                        </div>
-                    </div>
-                    <div class="card card-green">
-                        <div class="card-img-wrapper">
-                            <img src="assets/img/pizza calabresa.png" alt="Pizza Calabresa" class="card-pizza-img">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Carne seca</h3>
-                            <p class="card-desc">R$69</p>
-                            <a href="#pedido" class="card-btn">Pedir</a>
-                        </div>
-                    </div>
-                     <div class="card card-red">
-                        <div class="card-img-wrapper">
-                            <img src="assets/img/pizza frango catupiry.webp" alt="Pizza Frango com Catupiry"
-                                class="card-pizza-img">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Quatro Queijos</h3>
-                            <p class="card-desc">R$69</p>
-                            <a href="#pedido" class="card-btn">Pedir</a>
-                        </div>
-                    </div>
-                    <div class="card card-green">
-                        <div class="card-img-wrapper">
-                            <img src="assets/img/pizza calabresa.png" alt="Pizza Calabresa" class="card-pizza-img">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Calabresa</h3>
-                            <p class="card-desc">R$69</p>
-                            <a href="#pedido" class="card-btn">Pedir</a>
-                        </div>
-                    </div>
-                    <div class="card card-white">
-                        <div class="card-img-wrapper">
-                            <img src="assets/img/pizza calabresa.png" alt="Pizza Calabresa" class="card-pizza-img">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Calabresa</h3>
-                            <p class="card-desc">R$69</p>
-                            <a href="#pedido" class="card-btn">Pedir</a>
-                        </div>
-                    </div>
-                    <div class="card card-green">
-                        <div class="card-img-wrapper">
-                            <img src="assets/img/pizza calabresa.png" alt="Pizza Calabresa" class="card-pizza-img">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Calabresa</h3>
-                            <p class="card-desc">R$69</p>
-                            <a href="#pedido" class="card-btn">Pedir</a>
-                        </div>
-                    </div>
-                    <div class="card card-red">
-                        <div class="card-img-wrapper">
-                            <img src="assets/img/pizza calabresa.png" alt="Pizza Calabresa" class="card-pizza-img">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Calabresa</h3>
-                            <p class="card-desc">R$69</p>
-                            <a href="#pedido" class="card-btn">Pedir</a>
-                        </div>
-                    </div>
-                    <div class="card card-white">
-                        <div class="card-img-wrapper">
-                            <img src="assets/img/pizza calabresa.png" alt="Pizza Calabresa" class="card-pizza-img">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Calabresa</h3>
-                            <p class="card-desc">R$69</p>
-                            <a href="#pedido" class="card-btn">Pedir</a>
-                        </div>
-                    </div>
+                    <!-- Dinamicamente preenchido pelo JS -->
                 </div>
-                <a href="#pedido" class="card-btn btn-all-pizzas">Ver o cardápio todo</a>
             </div>
         </section>
+
+        <div class="pizzaWindowArea">
+            <div class="pizzaWindowBody">
+                <div class="pizzaInfo--cancelMobileButton">Voltar</div>
+                <div class="pizzaBig">
+                    <img src="" />
+                </div>
+                <div class="pizzaInfo">
+                    <h1>--</h1>
+                    <div class="pizzaInfo--desc">--</div>
+                    <div class="pizzaInfo--sizearea">
+                        <div class="pizzaInfo--sector">Tamanho</div>
+                        <div class="pizzaInfo--sizes">
+                            <div data-key="P" class="pizzaInfo--size selected">MÉDIA <span>--</span></div>
+                            <div data-key="M" class="pizzaInfo--size">GRANDE <span>--</span></div>
+                            <div data-key="G" class="pizzaInfo--size">SUPER <span>--</span></div>
+                            <div data-key="Mx" class="pizzaInfo--size ">MAX <span>--</span></div>
+                        </div>
+                    </div>
+                    <div class="pizzaInfo--pricearea">
+                        <div class="pizzaInfo--sector">Preço</div>
+                        <div class="pizzaInfo--price">
+                            <div class="pizzaInfo--actualPrice">R$ --</div>
+                            <div class="pizzaInfo--qtarea">
+                                <button class="pizzaInfo--qtmenos">-</button>
+                                <div class="pizzaInfo--qt">1</div>
+                                <button class="pizzaInfo--qtmais">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pizzaInfo--addButton">Adicionar ao carrinho</div>
+                    <div class="pizzaInfo--cancelButton">Cancelar</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="checkoutWindowArea">
+            <div class="checkoutWindowBody">
+                <div class="checkoutInfo--cancelMobileButton">Voltar</div>
+                <div class="checkoutInfo">
+                    <h1>Detalhes da Entrega</h1>
+
+                    <div class="checkout-form">
+                        <input type="text" id="checkout-nome" placeholder="Seu Nome Completo" required>
+                        <input type="tel" id="checkout-telefone" placeholder="Seu Telefone" required>
+
+                        <div class="cep-group">
+                            <input type="text" id="checkout-cep" placeholder="CEP (Apenas Números)" maxlength="8">
+                        </div>
+
+                        <input type="text" id="checkout-endereco" placeholder="Endereço (Rua, Avenida)" required>
+
+                        <div class="address-details">
+                            <input type="text" id="checkout-numero" placeholder="Número" required>
+                            <input type="text" id="checkout-bairro" placeholder="Bairro" required>
+                        </div>
+
+                        <input type="text" id="checkout-complemento" placeholder="Complemento / Ponto de Referência">
+
+                        <div class="payment-method">
+                            <select id="checkout-pagamento">
+                                <option value="" disabled selected>Forma de Pagamento</option>
+                                <option value="Pix">Pix via Celular</option>
+                                <option value="Cartão">Cartão (Leva a Maquininha)</option>
+                                <option value="Dinheiro">Dinheiro Físico</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="checkoutInfo--confirmButton">Enviar Pedido</div>
+                    <div class="checkoutInfo--cancelButton">Cancelar Pedido</div>
+                </div>
+            </div>
+        </div>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Flip.min.js"></script>
+    <script src="pizzaJson.js"></script>
+    <script src="cardapio.js"></script>
 </body>
 
 </html>

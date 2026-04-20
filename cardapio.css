@@ -1,17 +1,755 @@
-.tamanhos-preco {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+.models {
+    display: none;
+}
 
-    .card{
-        width: 100%;
-        margin: 0;
-        padding: 0;
+/* Consertando o botão do card branco duplicado */
+.card-white .card-btn {
+    border: 2px solid #C1443C;
+    background-color: transparent;
+    color: #333333;
+}
+
+.card-white .card-btn:hover {
+    background-color: #C1443C;
+    color: #ffffff;
+}
+
+/* =========================================
+   filtro de categorias
+========================================= */
+
+.category-buttons-box {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 50px;
+
+    .category-button {
+        background: #D84C43;
+        border-radius: 50px;
+        padding: 16px 24px;
+        color: white;
+        transition: .3s;
     }
 
-    .card:nth-child{
-        padding: 0;
+    .category-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+    }
+}
+
+
+/* =========================================
+   MODAL DE ESCOLHA (Pizza Window)
+========================================= */
+.pizzaWindowArea {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.65);
+    z-index: 9999;
+    display: none;
+    /* Muda para flex via JS */
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    /* Transição de Fade-in / out */
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.pizzaWindowBody {
+    background-color: #ffffff;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 40px;
+    gap: 40px;
+    width: fit-content;
+    box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Quando abrir o modal, esse efeito fará ele "pular" suavemente */
+.pizzaWindowArea[style*="opacity: 1"] .pizzaWindowBody {
+    transform: scale(1);
+}
+
+.pizzaBig {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.pizzaBig img {
+    height: 380px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0px 30px 25px rgba(0, 0, 0, 0.3));
+    animation: floatingPizza 6s ease-in-out infinite;
+}
+
+@keyframes floatingPizza {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(2deg);
+    }
+}
+
+.pizzaInfo {
+    flex: 1;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+.pizzaInfo h1 {
+    margin-top: 0;
+    font-size: 32px;
+    font-weight: 700;
+    color: #dc4e44;
+    line-height: 1.1;
+    margin-bottom: 10px;
+}
+
+.pizzaInfo--desc {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.pizzaInfo--sector {
+    color: #aaa;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+/* Opções de Tamanhos */
+.pizzaInfo--sizes {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.pizzaInfo--size {
+    padding: 10px 15px;
+    color: #000;
+    background-color: #f3f3f3;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    flex: 1;
+    text-align: center;
+}
+
+.pizzaInfo--size span {
+    font-size: 11px;
+    color: #888;
+    font-weight: normal;
+    display: block;
+    margin-top: 2px;
+}
+
+.pizzaInfo--size:hover {
+    background-color: #e5e5e5;
+}
+
+.pizzaInfo--size.selected {
+    background-color: #dc4e44;
+    color: #fff;
+    border-color: #C0392B;
+    box-shadow: 0px 5px 15px rgba(220, 78, 68, 0.4);
+}
+
+.pizzaInfo--size.selected span {
+    color: #ffd0cc;
+}
+
+/* Preço e Quantidade (Lado a lado) */
+.pizzaInfo--pricearea {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.pizzaInfo--actualPrice {
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+}
+
+/* Controle de Quantidade ++ -- */
+.pizzaInfo--qtarea {
+    display: inline-flex;
+    background-color: #f3f3f3;
+    border-radius: 15px;
+    height: 45px;
+    align-items: center;
+    padding: 0 5px;
+}
+
+.pizzaInfo--qtmenos,
+.pizzaInfo--qtmais {
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    height: 35px;
+    width: 35px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #333;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.pizzaInfo--qtmenos:hover,
+.pizzaInfo--qtmais:hover {
+    background-color: #ddd;
+}
+
+.pizzaInfo--qt {
+    line-height: 45px;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0 15px;
+    color: #333;
+}
+
+/* Botões Finais de Ação */
+.pizzaInfo--addButton {
+    padding: 16px 20px;
+    background-color: #64b95f;
+    /* Verde Italiano da marca */
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0px 8px 20px rgba(100, 185, 95, 0.4);
+    margin-bottom: 12px;
+}
+
+aside.show {
+    width: 30vw;
+}
+
+.pizzaInfo--addButton:hover {
+    background-color: #55a350;
+    transform: translateY(-2px);
+    box-shadow: 0px 10px 25px rgba(100, 185, 95, 0.5);
+}
+
+.pizzaInfo--cancelButton {
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    color: #888;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.pizzaInfo--cancelButton:hover {
+    color: #dc4e44;
+    text-decoration: underline;
+}
+
+/* Botão voltar Mobile (Fica oculto no Desktop) */
+/* Botão voltar Mobile (Fica oculto no Desktop) */
+.pizzaInfo--cancelMobileButton,
+.checkoutInfo--cancelMobileButton {
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #888;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* =========================================
+   MODAL DE CHECKOUT
+========================================= */
+.checkoutWindowArea {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.65);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.checkoutWindowBody {
+    background-color: #ffffff;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    gap: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.checkoutWindowArea[style*="opacity: 1"] .checkoutWindowBody {
+    transform: scale(1);
+}
+
+.checkoutInfo h1 {
+    margin-top: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #dc4e44;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.checkout-form input,
+.checkout-form select {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+.checkout-form input:focus,
+.checkout-form select:focus {
+    border-color: #dc4e44;
+}
+
+.cep-group,
+.address-details {
+    display: flex;
+    gap: 10px;
+}
+
+.checkoutInfo--confirmButton {
+    padding: 16px 20px;
+    background-color: #64b95f;
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0px 8px 20px rgba(100, 185, 95, 0.4);
+    margin-bottom: 12px;
+}
+
+.checkoutInfo--confirmButton:hover {
+    background-color: #55a350;
+    transform: translateY(-2px);
+    box-shadow: 0px 10px 25px rgba(100, 185, 95, 0.5);
+}
+
+.checkoutInfo--cancelButton {
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    color: #888;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.checkoutInfo--cancelButton:hover {
+    color: #dc4e44;
+    text-decoration: underline;
+}
+
+/* Responsividade do modal */
+@media (max-width: 850px) {
+    .pizzaWindowBody {
+        flex-direction: column;
+        padding: 30px;
+        gap: 20px;
+        border-radius: 20px;
+    }
+
+    .pizzaBig img {
+        height: 250px;
+    }
+
+    .pizzaInfo h1 {
+        font-size: 26px;
+    }
+}
+
+.menu-openner {
+    margin-right: 15px;
+    font-size: 26px;
+    background-color: #ef9a9a;
+    padding: 5px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.menu-openner span {
+    margin-right: 10px;
+}
+
+.menu-closer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 30px;
+    cursor: pointer;
+    line-height: 1;
+    margin-bottom: 10px;
+    color: #888;
+    transition: color 0.2s;
+}
+
+.menu-closer:hover {
+    color: #dc4e44;
+}
+
+aside {
+    background-color: #ffffff;
+    width: 0vw;
+    font-family: 'Poppins', sans-serif;
+    transition: all ease .3s;
+    overflow-x: hidden;
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 9999;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+}
+
+aside.show {
+    width: 30vw;
+}
+
+.cart--area {
+    padding: 30px;
+}
+
+.cart--area h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #dc4e44;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.cart {
+    margin-bottom: 20px;
+}
+
+.cart--item {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.cart--item img {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+}
+
+.cart--item-nome {
+    flex: 1;
+    font-weight: 500;
+    font-size: 14px;
+    color: #333;
+}
+
+.cart--item--qtarea {
+    display: inline-flex;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+    height: 32px;
+    align-items: center;
+}
+
+.cart--item--qtarea button {
+    border: 0;
+    background-color: transparent;
+    font-size: 18px;
+    outline: 0;
+    cursor: pointer;
+    padding: 0px 10px;
+    color: #333;
+    transition: color 0.2s;
+}
+
+.cart--item--qtarea button:hover {
+    color: #dc4e44;
+}
+
+.cart--item--qt {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 0px 5px;
+    color: #000;
+}
+
+.cart--totalitem {
+    padding: 15px 0;
+    color: #555;
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+}
+
+.cart--totalitem span:first-child {
+    font-weight: 600;
+}
+
+.cart--totalitem.big {
+    font-size: 22px;
+    color: #333;
+    font-weight: 700;
+    border-top: 2px solid #eee;
+    padding-top: 20px;
+}
+
+.cart--finalizar {
+    padding: 18px 20px;
+    border-radius: 20px;
+    background-color: #64b95f;
+    color: #FFF;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0px 8px 20px rgba(100, 185, 95, 0.4);
+    border: none;
+}
+
+.cart--finalizar:hover {
+    background-color: #55a350;
+    transform: translateY(-2px);
+    box-shadow: 0px 10px 25px rgba(100, 185, 95, 0.5);
+}
+
+@media (max-width: 840px) {
+    aside {
+        width: auto;
+        position: fixed;
+        left: 100vw;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        transition: all ease .2s;
+    }
+
+    aside.show {
+        width: auto;
+        left: 0;
+    }
+
+    .cart--area {
+        width: 100vw;
+    }
+
+    .menu-closer {
+        display: block;
+    }
+}
+
+
+@media (max-width: 450px) {
+    .pizzaWindowArea {
+        align-items: flex-end;
+        /* Mobile gruda o body embaixo */
+    }
+
+    .pizzaWindowBody {
+        width: 100%;
         margin: 0;
+        border-radius: 30px 30px 0 0;
+        padding: 25px;
+        padding-top: 50px;
+        /* Espaço pro botão mobile */
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .pizzaInfo--cancelButton {
+        display: none;
+    }
+
+    .pizzaInfo--cancelMobileButton {
+        display: block;
+    }
+
+    .pizzaBig img {
+        height: 200px;
+    }
+
+    .pizzaInfo--pricearea {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .pizzaInfo--qtarea {
+        align-self: flex-end;
+        margin-top: -50px;
+        /* Gambiarra visual pra colocar ao lado do preço sem zoar o flex */
+    }
+}
+
+/* =========================================
+   BARRA DE PESQUISA (DESIGN PREMIUM)
+========================================= */
+.nav-actions {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    display: none;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 8px 20px;
+    border-radius: 40px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    right: 0;
+    top: 200%;
+    transform: translateY(-50%) scale(0.8);
+    z-index: 100;
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.search-bar.show {
+    display: flex;
+    opacity: 1;
+    width: 300px;
+    transform: translateY(-50%) scale(1);
+}
+
+#search-input {
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    width: 100%;
+}
+
+.search-closer {
+    cursor: pointer;
+    font-size: 24px;
+    color: #bbb;
+    transition: all 0.2s;
+    line-height: 1;
+    margin-left: 10px;
+}
+
+.search-closer:hover {
+    color: #4f934b;
+    transform: rotate(90deg);
+}
+
+/* Ocultar lupa quando a barra está aberta */
+.nav-actions.search-active .search-openner {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0);
+}
+
+@media (max-width: 840px) {
+    .search-bar.show {
+        width: calc(100vw - 40px);
+        position: fixed;
+        left: 20px;
+        right: 20px;
+        top: 20px;
+        transform: scale(1);
+        z-index: 2000;
+    }
+}
+
+/* =========================================
+   TÍTULOS DE CATEGORIA (GIGANTE E PREMIUM)
+========================================= */
+.category-title {
+    grid-column: 1 / -1;
+    width: 100%;
+    text-align: left;
+    font-size: 36px;
+    font-weight: 900;
+    color: #333;
+    margin: 60px 0 10px 0;
+    padding-bottom: 15px;
+    border-bottom: 4px solid #64b95f;
+    /* Verde tema */
+    font-family: 'Hepta Slab', Helvetica, Arial;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+@media (max-width: 840px) {
+    .category-title {
+        font-size: 28px;
+        margin: 40px 0 20px 0;
+        text-align: center;
     }
 }

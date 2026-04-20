@@ -71,6 +71,56 @@ body {
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
             }
         }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            .search-openner {
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #64b95f;
+                /* Verde dos cards */
+                transition: transform 0.3s ease, opacity 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.1);
+                    opacity: 0.8;
+                }
+
+                svg {
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+
+            .menu-openner {
+                display: flex;
+                align-items: center;
+                background-color: #ffffff;
+                color: #64b95f;
+                /* Verde dos cards */
+                padding: 10px 20px;
+                border-radius: 40px;
+                cursor: pointer;
+                gap: 8px;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+                }
+
+                span {
+                    margin-right: 8px;
+                    font-size: 18px;
+                    font-weight: 600;
+                }
+            }
+        }
     }
 }
 
@@ -387,7 +437,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 60px;
+    margin-top: 40px;
+    transition: none !important;
     /* Abre espaço no topo do card pro overlay da imagem */
 }
 
@@ -505,7 +556,7 @@ body {
 
 /* --- Cardápio Section --- */
 .cardapio-container {
-    padding: 60px 0 200px;
+    padding: 150px 0 200px;
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
@@ -1427,14 +1478,17 @@ main {
 }
 
 /* SVG da cobra animada: centralizada e cobrindo todo o content-wrapper */
-.content-wrapper > svg {
+.content-wrapper>svg {
     position: absolute;
-    top: 0px; 
+    top: 0px;
     left: 50%;
     transform: translateX(-50%);
-    width: 100%;      /* Pode aumentar aqui livremente agora */
-    height: 96%;      /* IMPORTANTE: auto permite que a largura cresça sem travar na altura *//* Garante que cubra a altura toda do wrap */
+    width: 100%;
+    /* Pode aumentar aqui livremente agora */
+    height: 96%;
+    /* IMPORTANTE: auto permite que a largura cresça sem travar na altura */
+    /* Garante que cubra a altura toda do wrap */
     pointer-events: none;
     z-index: 0;
-    overflow: hidden; 
+    overflow: hidden;
 }
