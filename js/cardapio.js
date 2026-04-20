@@ -467,7 +467,7 @@ const configurarCheckout = () => {
 
         let mensagemFinal = encodeURIComponent(mensagem)
 
-        let url = `https://wa.me/24988100625?text=${mensagemFinal}`
+        let url = `https://wa.me/55555555555?text=${mensagemFinal}`
 
         window.open(url, '_blank')
 
