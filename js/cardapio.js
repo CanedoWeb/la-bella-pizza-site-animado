@@ -1,4 +1,4 @@
-gsap.registerPlugin(Flip);
+
 
 const seleciona = (elemento) => document.querySelector(elemento)
 const selecionaTodos = (elemento) => document.querySelectorAll(elemento)
@@ -528,14 +528,26 @@ const filtro = () => {
 
     botoes.forEach(botao => {
         botao.addEventListener('click', () => {
-            // 1. Atualiza qual botão está ativo (estética)
+            const isCurrentlyActive = botao.classList.contains('active');
+            
+            // 1. Remove a classe active de todos os botões
             botoes.forEach(b => b.classList.remove('active'));
-            botao.classList.add('active');
 
-            // 2. Atualiza a Central de Comando
-            categoriaAtual = botao.getAttribute('data-filter');
+            if (isCurrentlyActive) {
+                // 2a. Se o botão clicado já estava ativo, voltamos para "Todos"
+                categoriaAtual = 'all';
+                const btnTodos = [...botoes].find(b => b.getAttribute('data-filter') === 'all');
+                //poderia ser seleciona('.pizzas-todas'), mas ai se eu mudo a classe isso da merda,
+                //o atual lida diretamente com a logica de dado
 
-            // 3. Manda o segurança trabalhar!
+                if (btnTodos) btnTodos.classList.add('active');
+            } else {
+                // 2b. Se não estava ativo, ativa o botão atual e define a categoria
+                botao.classList.add('active');
+                categoriaAtual = botao.getAttribute('data-filter');
+            }
+
+            // 3. Recarrega a vitrine
             carregarPizzas();
         });
     });

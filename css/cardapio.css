@@ -2,6 +2,8 @@
     display: none;
 }
 
+
+
 /* Consertando o botão do card branco duplicado */
 .card-white .card-btn {
     border: 2px solid #C1443C;
@@ -25,11 +27,17 @@
     gap: 50px;
 
     .category-button {
-        background: #D84C43;
+        background: #ffffff;
+        border: 2px solid #DB4D44;
         border-radius: 50px;
         padding: 16px 24px;
-        color: white;
+        color: #333;
         transition: .3s;
+
+        &.active {
+            background: #DB4D44;
+            color: #ffffff;
+        }
     }
 
     .category-button:hover {
