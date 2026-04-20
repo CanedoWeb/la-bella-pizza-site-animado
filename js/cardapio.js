@@ -541,6 +541,7 @@ const filtro = () => {
                 //o atual lida diretamente com a logica de dado
 
                 if (btnTodos) btnTodos.classList.add('active');
+                
             } else {
                 // 2b. Se não estava ativo, ativa o botão atual e define a categoria
                 botao.classList.add('active');

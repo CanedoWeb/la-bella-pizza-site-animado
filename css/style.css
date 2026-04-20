@@ -542,11 +542,6 @@ body {
     color: #333333;
 }
 
-.card-white .btn-outline:hover {
-    background-color: #DE4E45;
-    color: #ffffff;
-}
-
 /* --- Momento Section --- */
 .momento {
     padding: 60px 0 200px;
