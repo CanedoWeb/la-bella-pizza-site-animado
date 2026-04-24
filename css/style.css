@@ -121,6 +121,24 @@ body {
                 }
             }
         }
+
+        /* Hamburger Menu Icon */
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1100;
+
+            span {
+                display: block;
+                width: 30px;
+                height: 3px;
+                background-color: #ffffff;
+                border-radius: 3px;
+                transition: all 0.3s ease;
+            }
+        }
     }
 }
 
@@ -822,14 +840,14 @@ body {
     align-items: center;
     justify-content: center;
     gap: 40px;
-    min-height: 200px;
+    min-height: 250px;
     margin-bottom: 80px;
 }
 
 .testimonial-track {
     flex: 1;
     position: relative;
-    min-height: 160px;
+    min-height: 250px;
     display: flex;
     align-items: center;
     justify-content: center;

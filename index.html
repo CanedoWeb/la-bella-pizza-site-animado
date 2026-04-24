@@ -14,6 +14,22 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <script>
+        // Função para corrigir a altura real (100vh) no mobile sem que pule ao rolar a página
+        function setVH() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        setVH();
+        window.lastWidth = window.innerWidth;
+        window.addEventListener('resize', () => {
+            // Atualiza o --vh apenas se a LARGURA mudar (ignora a barra de endereço subindo/descendo)
+            if (window.innerWidth !== window.lastWidth) {
+                setVH();
+                window.lastWidth = window.innerWidth;
+            }
+        });
+    </script>
 </head>
 
 <body>
@@ -30,9 +46,11 @@
 
             <a href="#sobre" class="nav-link">Sobre</a>
             <a href="#contato" class="nav-link">Contato</a>
-            <div class="nav-actions">
-                <div class="search-openner">🔍</div>
-                <div class="menu-openner"><span>0</span>🛒</div>
+            <a href="cardápio.html" class="nav-btn">Pedir Pizza</a>
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </nav>
     </header>
@@ -349,7 +367,7 @@
                 </div>
             </section>
 
-            <svg viewBox="0 0 1920 7230" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <svg class="minhocao" viewBox="0 0 1920 7230" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                 <path id="stroke-path"
                     d="M4 6.47363C119.427 1240.38 1920 38.291 1920 1289.97C1920 2525.01 27.9519 1355.75 1.5 2219.97C-36.1509 3411.62 2350.47 1158.28 1840.68 4192.9L1844.68 4172.54C1599.14 6007.05 110.088 4784.53 0.499836 5692.47C-122.468 6754.38 2243.5 5156.97 1856.35 6715.14C1683.97 7348.97 919 7118.97 0.999916 7118.97"
                     stroke="#AAD5A7" stroke-width="200" stroke-linecap="round" />
@@ -418,6 +436,22 @@
     <script src="./js/slider.js"></script>
     <script src="./js/svg-line.js"></script>
     <script src="./js/testimonials.js"></script>
+    <script>
+        // Menu Mobile Toggle
+        const hamburger = document.querySelector('.hamburger-menu');
+        const header = document.querySelector('.header');
+
+        hamburger.addEventListener('click', () => {
+            header.classList.toggle('menu-open');
+        });
+
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                header.classList.remove('menu-open');
+            });
+        });
+    </script>
 </body>
 
 </html>
