@@ -457,7 +457,8 @@ body {
     align-items: center;
     margin-top: 40px;
     transition: none !important;
-    /* Abre espaço no topo do card pro overlay da imagem */
+    opacity: 0;
+    transform: scale(0.4);
 }
 
 .card-img-wrapper {
@@ -569,7 +570,7 @@ body {
 
 /* --- Cardápio Section --- */
 .cardapio-container {
-    padding: 150px 0 200px;
+    padding: 40px 0 200px;
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
@@ -1504,4 +1505,63 @@ main {
     pointer-events: none;
     z-index: 0;
     overflow: hidden;
+}
+
+/* --- Promo Slider --- */
+.promocao-container {
+    max-width: 1200px;
+    width: 80%;
+    margin: 0 auto;
+    padding: 10px 0; /* Diminuído de 20px para 10px para aproximar do cardápio */
+}
+
+.promo-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.promo-slides {
+    display: flex;
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.promo-slide {
+    width: 100%;
+    display: block;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.promo-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.7);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.promo-btn:hover {
+    background: #DE4E45;
+    color: white;
+}
+
+.promo-btn.prev {
+    left: 20px;
+}
+
+.promo-btn.next {
+    right: 20px;
 }

@@ -1,5 +1,3 @@
-
-
 const seleciona = (elemento) => document.querySelector(elemento)
 const selecionaTodos = (elemento) => document.querySelectorAll(elemento)
 
@@ -8,6 +6,9 @@ let modalKey = 0 //codigo de qual pizza ta mudando no modal
 let quantPizzas = 1 //controlar a qntt inicial de pizzas no modal
 
 let cart = [] //carrinho
+
+let pizzaPromoQuartaUm = [2, 6, 4, 5, 7, 8, 11, 14, 15, 20, 24]
+let pizzaPromoQuartaDois = [26, 39, 29, 32, 42]
 
 let termoAtual = ''
 
@@ -245,6 +246,9 @@ const atualizarCarrinho = () => {
     let desconto = 0
     let total = 0
 
+    let diaDaSemana = new Date().getDay()
+    let quartaFeira = (diaDaSemana === 3)
+
     if (cart.length > 0) {
         seleciona('aside').classList.add('show')
         //so pra limpar por seguranca, dps adicionamos dnv
@@ -289,9 +293,17 @@ const atualizarCarrinho = () => {
             seleciona('.cart').append(cartItem)
 
             subtotal += itemDoCarrinho.qt * itemDoCarrinho.price
+
+            if(quartaFeira && pizzaPromoQuartaUm.includes(itemDoCarrinho.id) && itemDoCarrinho.size === 'M'){
+                desconto += (itemDoCarrinho.qt * 10) 
+            }
+
+            if(quartaFeira && pizzaPromoQuartaDois.includes(itemDoCarrinho.id)){
+                desconto += (itemDoCarrinho.qt * 11) 
+            }
         })
 
-        desconto = subtotal * 0.1
+        //desconto = subtotal * 0.1
         total = subtotal - desconto
 
         seleciona('.subtotal span:last-child').innerHTML = formatoReal(subtotal)
@@ -529,7 +541,7 @@ const filtro = () => {
     botoes.forEach(botao => {
         botao.addEventListener('click', () => {
             const isCurrentlyActive = botao.classList.contains('active');
-            
+
             // 1. Remove a classe active de todos os botões
             botoes.forEach(b => b.classList.remove('active'));
 
@@ -541,7 +553,7 @@ const filtro = () => {
                 //o atual lida diretamente com a logica de dado
 
                 if (btnTodos) btnTodos.classList.add('active');
-                
+
             } else {
                 // 2b. Se não estava ativo, ativa o botão atual e define a categoria
                 botao.classList.add('active');
@@ -554,63 +566,105 @@ const filtro = () => {
     });
 }
 
-
 const carregarPizzas = () => {
-    let grid = seleciona('.cards-grid')
+    let grid = seleciona('.cards-grid');
+    grid.innerHTML = '';
 
-    grid.innerHTML = ''
+    // Regra da Promoção
+    const diaDaSemana = new Date().getDay();
+    const quartaFeira = (diaDaSemana === 3);
 
-    let ultimaCategoria = ''
+    // Listas separadas
+    let pizzasPromo = [];
+    let pizzasNormais = [];
 
-    pizzaJson.forEach((item, index) => {
+    // Mapeamos para não perder o index original (que é vital para o modal abrir a pizza certa)
+    pizzaJson.forEach((item, originalIndex) => {
+        let ehPromo = quartaFeira && (pizzaPromoQuartaUm.includes(item.id) || pizzaPromoQuartaDois.includes(item.id));
+        if (ehPromo) {
+            pizzasPromo.push({ item, index: originalIndex });
+        } else {
+            pizzasNormais.push({ item, index: originalIndex });
+        }
+    });
 
+    let ultimaCategoria = '';
+
+    // Função interna só para montar o card na tela, evitando repetir código
+    const desenharCard = ({ item, index }, ehPromoSection) => {
         const categoriaSlug = item.category.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
 
-        let nomeBate = item.name.toLowerCase().includes(termoAtual.toLowerCase())
-        let categoriaBate = categoriaAtual === 'all' || categoriaAtual === categoriaSlug
+        let nomeBate = item.name.toLowerCase().includes(termoAtual.toLowerCase());
+        let categoriaBate = categoriaAtual === 'all' || categoriaAtual === categoriaSlug;
 
+        // Filtro da barra de pesquisa e botoes de categoria
         if (!nomeBate || !categoriaBate) {
             return;
         }
 
-        let pizzaItem = seleciona('.models .card').cloneNode(true)
-        pizzaItem.classList.add(categoriaSlug) //adiciona a classe correspondente a categoria
-        // ex: pizzas-tradicionais
+        let pizzaItem = seleciona('.models .card').cloneNode(true);
+        pizzaItem.classList.add(categoriaSlug);
 
-        // Adiciona título da categoria se ela mudar
-        if (item.category && item.category !== ultimaCategoria) {
-            ultimaCategoria = item.category
+        // Se NÃO for a seção de promoção, renderizamos os títulos de categoria padrão
+        if (!ehPromoSection) {
+            if (item.category && item.category !== ultimaCategoria) {
+                ultimaCategoria = item.category;
 
-            let titulo = document.createElement('h2')
-            titulo.classList.add('category-title')
-            titulo.classList.add(categoriaSlug)
-            titulo.innerHTML = ultimaCategoria
-            grid.append(titulo)
+                let titulo = document.createElement('h2');
+                titulo.classList.add('category-title');
+                titulo.classList.add(categoriaSlug);
+                titulo.innerHTML = ultimaCategoria;
+                grid.append(titulo);
+            }
         }
 
-        // A mágica das cores: Pega as classes existentes do seu style.css e cicla elas infinitamente!
-        const cores = ['card-red', 'card-white', 'card-green']
-        pizzaItem.classList.add(cores[index % 3])
+        // Ciclagem de cores (usa o index original para manter a consistência de cor da pizza)
+        const cores = ['card-red', 'card-white', 'card-green'];
+        pizzaItem.classList.add(cores[index % 3]);
 
+        grid.append(pizzaItem);
+        if (window.observeCard) window.observeCard(pizzaItem);
 
-        grid.append(pizzaItem)
+        preencheDadosPizza(pizzaItem, item, index);
 
-        preencheDadosPizza(pizzaItem, item, index)
-
-        //pizza clicada
+        // Ação do clique para abrir o Modal
         pizzaItem.querySelector('.card-btn').addEventListener('click', (e) => {
-            e.preventDefault()
+            e.preventDefault();
+            let chave = pegarKey(e);
+            abrirModal();
+            preencherDadosModal(item);
+            preencherTamanhos(chave);
+            seleciona('.pizzaInfo--qt').innerHTML = quantPizzas;
+            escolherTamanho(chave);
+        });
+        
+        botoesFechar();
+    };
 
-            let chave = pegarKey(e)
+    // 1. Renderiza "Ofertas do Dia" primeiro (se existir promoção)
+    if (pizzasPromo.length > 0) {
+        // Verifica se alguma pizza de promo passou no filtro atual pra não colocar um H2 fantasma na tela
+        let temPromoPraMostrar = pizzasPromo.some(({item}) => {
+            const catSlug = item.category.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+            return item.name.toLowerCase().includes(termoAtual.toLowerCase()) &&
+                   (categoriaAtual === 'all' || categoriaAtual === catSlug);
+        });
 
-            abrirModal()
-            preencherDadosModal(item) // Corrigido o nome para bater com a definição
-            preencherTamanhos(chave)
-            seleciona('.pizzaInfo--qt').innerHTML = quantPizzas
-            escolherTamanho(chave)
-        })
-        botoesFechar()
-    })
+        if (temPromoPraMostrar) {
+            let tituloPromo = document.createElement('h2');
+            tituloPromo.classList.add('category-title');
+            tituloPromo.innerHTML = "Ofertas do Dia"; 
+            grid.append(tituloPromo);
+            
+            pizzasPromo.forEach(obj => desenharCard(obj, true));
+        }
+    }
+
+    // 2. Renderiza as pizzas Normais em seguida
+    pizzasNormais.forEach(obj => desenharCard(obj, false));
+}
+
+const promocoes = () => {
 
 }
 

@@ -1,12 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>La Bella Pizza - Cardápio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Damion&family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/cardapio.css">
+    <script>
+        // Função para corrigir a altura real (100vh) no mobile sem que pule ao rolar a página
+        function setVH() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        setVH();
+        window.lastWidth = window.innerWidth;
+        window.addEventListener('resize', () => {
+            // Atualiza o --vh apenas se a LARGURA mudar (ignora a barra de endereço subindo/descendo)
+            if (window.innerWidth !== window.lastWidth) {
+                setVH();
+                window.lastWidth = window.innerWidth;
+            }
+        });
+    </script>
 </head>
 
 <body class="menu-page">
@@ -86,6 +110,19 @@
         </nav>
     </header>
     <main>
+        <section class="promocao" style="padding-top: 80px;"> <!-- Ajustado de 100px para 80px -->
+            <div class="promocao-container">
+                <div class="promo-slider">
+                    <div class="promo-slides">
+                        <img src="assets/img/banner1 1.webp" alt="Promoção 1" class="promo-slide">
+                        <img src="assets/img/banner2 1.webp" alt="Promoção 2" class="promo-slide">
+                    </div>
+                    <button class="promo-btn prev" aria-label="Anterior">&#10094;</button>
+                    <button class="promo-btn next" aria-label="Próximo">&#10095;</button>
+                </div>
+            </div>
+        </section>
+
         <section class="cardapio">
             <div class="cardapio-container">
                 <h2 class="section-title">Cardápio</h2>
@@ -179,8 +216,9 @@
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Flip.min.js"></script>
+    <script src="js/promo-slider.js"></script>
+    <script src="js/card-animation.js"></script>
     <script src="js/pizzaJson.js"></script>
     <script src="js/cardapio.js"></script>
 </body>
-
 </html>

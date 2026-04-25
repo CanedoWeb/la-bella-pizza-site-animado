@@ -278,19 +278,15 @@
             </section>
 
             <section class="promocao">
-                <div class="promocao-bg"><img src="assets/img/Rectangle 134.webp" alt="Background Curvo"></div>
                 <div class="promocao-container">
-
-                    <div class="esquerda">
-                        <h2 class="promocao-title">Quarta da Casa</h2>
-                        <p class="promocao-desc">Sabores selecionados com condições especiais a partir de:</p>
-                        <p class="promocao-price">R$ 59,90</p>
+                    <div class="promo-slider">
+                        <div class="promo-slides">
+                            <img src="assets/img/banner1 1.webp" alt="Promoção 1" class="promo-slide">
+                            <img src="assets/img/banner2 1.webp" alt="Promoção 2" class="promo-slide">
+                        </div>
+                        <button class="promo-btn prev" aria-label="Anterior">&#10094;</button>
+                        <button class="promo-btn next" aria-label="Próximo">&#10095;</button>
                     </div>
-                    <div class="direita">
-                        <img src="assets/img/pizza na tabua.webp" alt="Pizza da Casa em Destaque"
-                            class="promocao-pizza-img">
-                    </div>
-
                 </div>
             </section>
 
@@ -434,6 +430,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/CustomEase.min.js"></script>
 
     <script src="./js/slider.js"></script>
+    <script src="./js/card-animation.js"></script>
     <script src="./js/svg-line.js"></script>
     <script src="./js/testimonials.js"></script>
     <script>
@@ -452,6 +449,7 @@
             });
         });
     </script>
+    <script src="js/promo-slider.js"></script>
 </body>
 
 </html>
