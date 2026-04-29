@@ -154,6 +154,15 @@
 
         <!-- Wrapper relativo para todas as seções pós-hero, onde o background do SVG roda -->
         <div class="content-wrapper">
+            <section class="conceito" id="conceito">
+                <div class="conceito-container">
+                    <h2 class="section-title">Tradição em cada fatia</h2>
+                    <p class="conceito-text">
+                        Nascida no coração da Serra Fluminense, a <strong>La Bella Pizza Petrópolis</strong> une a autêntica tradição italiana ao paladar brasileiro. Com massa de fermentação lenta (48h) e ingredientes criteriosamente selecionados, fomos escolhidos por quem entende de sabor como uma das melhores pizzarias de Petrópolis. Uma experiência gastronômica inesquecível, do nosso forno a lenha direto para a sua mesa.
+                    </p>
+                </div>
+            </section>
+
             <section class="momento">
                 <div class="momento-container">
                     <h2 class="section-title">Escolha seu momento</h2>
@@ -365,10 +374,10 @@
                 </div>
             </section>
 
-            <svg class="minhocao" viewBox="0 0 1920 7230" fill="none" xmlns="http://www.w3.org/2000/svg"
+            <svg class="minhocao" viewBox="0 0 1920 7730" fill="none" xmlns="http://www.w3.org/2000/svg"
                 preserveAspectRatio="none">
                 <path id="stroke-path"
-                    d="M4 6.47363C119.427 1240.38 1920 38.291 1920 1289.97C1920 2525.01 27.9519 1355.75 1.5 2219.97C-36.1509 3411.62 2350.47 1158.28 1840.68 4192.9L1844.68 4172.54C1599.14 6007.05 110.088 4784.53 0.499836 5692.47C-122.468 6754.38 2243.5 5156.97 1856.35 6715.14C1683.97 7348.97 919 7118.97 0.999916 7118.97"
+                    d="M4 6.47363L4 506.47363C119.427 1740.38 1920 538.291 1920 1789.97C1920 3025.01 27.9519 1855.75 1.5 2719.97C-36.1509 3911.62 2350.47 1658.28 1840.68 4692.9L1844.68 4672.54C1599.14 6507.05 110.088 5284.53 0.499836 6192.47C-122.468 7254.38 2243.5 5656.97 1856.35 7215.14C1683.97 7848.97 919 7618.97 0.999916 7618.97"
                     stroke="#AAD5A7" stroke-width="200" stroke-linecap="round" />
             </svg>
 
@@ -391,6 +400,69 @@
                 </div>
             </div>
         </section>
+
+        <!-- Seção FAQ com Schema Markup para GEO/SEO -->
+        <section class="faq-section" id="faq">
+            <div class="faq-container">
+                <h2 class="section-title">Perguntas Frequentes</h2>
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <button class="faq-question">Onde fica a La Bella Pizza? <span class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>A La Bella Pizza está localizada no Bingen, 2076, em Petrópolis - RJ. Você pode saborear nossas pizzas no salão acolhedor ou pedir pelo nosso delivery rápido e eficiente.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">Quais são as melhores pizzas de Petrópolis? <span class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Modéstia à parte, nossos clientes consideram a La Bella uma das melhores pizzarias de Petrópolis! Nossos sabores mais pedidos incluem a clássica Frango com Catupiry, a exclusiva Lombo Canadense e as nossas pizzas doces irresistíveis.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">Como funciona a entrega (delivery)? <span class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Nosso delivery funciona todos os dias, das 18h às 23h. Você pode pedir diretamente pelo nosso site (adicionando as pizzas ao carrinho) ou através do nosso WhatsApp (24) 99932-3962.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">Como usar o carrinho para fazer um pedido no site? <span class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Basta navegar pelo nosso cardápio, clicar em "Pedir" na pizza desejada, escolher o tamanho e confirmar a quantidade. A pizza vai direto para o seu carrinho no canto superior direito. Ao terminar, clique no ícone do carrinho e em "Finalizar a compra".</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JSON-LD para GEO/SEO -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [{
+            "@type": "Question",
+            "name": "Onde fica a La Bella Pizza?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A La Bella Pizza está localizada no Bingen, 2076, em Petrópolis - RJ. Você pode saborear nossas pizzas no salão ou pedir pelo nosso delivery."
+            }
+          }, {
+            "@type": "Question",
+            "name": "Quais são as melhores pizzas de Petrópolis?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Modéstia à parte, nossos clientes consideram a La Bella uma das melhores pizzarias de Petrópolis! Nossos sabores mais pedidos incluem a clássica Frango com Catupiry e a exclusiva Lombo Canadense."
+            }
+          }, {
+            "@type": "Question",
+            "name": "Como funciona a entrega (delivery)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nosso delivery funciona todos os dias, das 18h às 23h. Você pode pedir diretamente pelo nosso site ou através do nosso WhatsApp (24) 99932-3962."
+            }
+          }]
+        }
+        </script>
     </main>
     <footer>
         <div class="bg-footer"><img src="assets/img/bg footer.webp" alt=""></div>
@@ -411,7 +483,7 @@
                     <div class="right">
                         <h4>Peça sua pizza</h4>
                         <ul>
-                            <li><a href="https://wa.me/5524999323962" target="_blank">Pedir pelo Whatsapp</a></li>
+                            <li><a href="https://wa.me/5524999323962" target="_blank">Tirar dúvidas via Whatsapp</a></li>
                             <li><a href="#pedido">Pedir em 3 cliques</a></li>
                         </ul>
                     </div>

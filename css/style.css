@@ -561,6 +561,32 @@ body {
     color: #333333;
 }
 
+/* --- Conceito Section --- */
+.conceito {
+    padding: 120px 20px 80px;
+    background-color: transparent;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.conceito-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.conceito-text {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #4A4A4A;
+    font-weight: 400;
+}
+
+.conceito-text strong {
+    color: #DE4E45;
+    font-weight: 700;
+}
+
 /* --- Momento Section --- */
 .momento {
     padding: 60px 0 200px;

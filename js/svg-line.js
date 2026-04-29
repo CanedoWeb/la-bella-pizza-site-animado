@@ -37,7 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Pense nesses números como "tempo de tela".
     // Se um trecho está rápido demais, aumente o número dele (ex: de 20 para 50).
     
-    tl.to(path, { strokeDashoffset: L * 0.80, ease: "none", duration: 18 }) // Início (Médio)
+    tl.to(path, { strokeDashoffset: L * 0.90, ease: "none", duration: 8 }) // Conceito (Reto)
+      .to(path, { strokeDashoffset: L * 0.80, ease: "none", duration: 18 }) // Início (Médio)
       .to(path, { strokeDashoffset: L * 0.70, ease: "none", duration: 7  }) // Cardápio (Rápido)
       .to(path, { strokeDashoffset: L * 0.60, ease: "none", duration: 6 }) // Descida (Médio)
       .to(path, { strokeDashoffset: L * 0.40, ease: "none", duration: 20 }) // Promoção (Rápido)
