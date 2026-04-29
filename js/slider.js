@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const slidesData = [
         {
             title: "Calabresa",
+            modalSlug: "calabresa",
             desc: "Clássica e intensa, com calabresa selecionada, queijo derretido e um toque artesanal que equilibra sabor e textura.",
             img: "assets/img/pizza calabresa.png",
             experiencia: ["Picante", "Muito recheio", "Combina<br>com vinho"],
@@ -17,6 +18,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         },
         {
             title: "Frango Catupiry",
+            modalSlug: "frango-com-catupiry",
             desc: "A união perfeita do frango desfiado suculento com a cremosidade do autêntico Catupiry, assada ao ponto ideal.",
             img: "assets/img/pizza frango catupiry.webp",
             experiencia: ["Cremosa", "Muito recheio", "Saborosa"],
@@ -24,7 +26,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
             rotation: -18.857
         },
         {
-            title: "Brasileira",
+            title: "Baiana",
+            modalSlug: "baiana",
             desc: "Os sabores vibrantes da nossa terra, misturando ingredientes frescos e um tempero inconfundível para o paladar nacional.",
             img: "assets/img/pizza brasileira.png",
             experiencia: ["Temperada", "Variada", "Toque sutil"],
@@ -33,6 +36,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         },
         {
             title: "Quatro Queijos",
+            modalSlug: "quatro-queijos",
             desc: "Uma explosão laticínia! Gorgonzola, parmesão, provolone e mozzarela fundidos numa base crocante e tentadora.",
             img: "assets/img/image-Photoroom (59) 1.webp",
             experiencia: ["Intensa", "Texturizada", "Combina<br>com vinho"],
@@ -53,7 +57,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
         ingSpans: document.querySelectorAll('.features-group:last-of-type .feature-item span'),
         dots: document.querySelectorAll('.dot'),
         btnNext: document.querySelector('button[aria-label="Próxima"]'),
-        btnPrev: document.querySelector('button[aria-label="Anterior"]')
+        btnPrev: document.querySelector('button[aria-label="Anterior"]'),
+        orderBtn: document.querySelector('.order-btn')
     };
 
     // Lógica de transição de Slide
@@ -153,6 +158,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
             DOM.img.src = nextData.img;
             // Atualizar Dots
             DOM.dots.forEach((dot, index) => { dot.classList.toggle('active', index === currentIndex); });
+            // Atualizar link do pedido
+            if (DOM.orderBtn) DOM.orderBtn.href = `cardápio.html?modal=${nextData.modalSlug}`;
         }, 0.5); // Executa logo apos o fade out deles
 
 

@@ -294,12 +294,12 @@ const atualizarCarrinho = () => {
 
             subtotal += itemDoCarrinho.qt * itemDoCarrinho.price
 
-            if(quartaFeira && pizzaPromoQuartaUm.includes(itemDoCarrinho.id) && itemDoCarrinho.size === 'M'){
-                desconto += (itemDoCarrinho.qt * 10) 
+            if (quartaFeira && pizzaPromoQuartaUm.includes(itemDoCarrinho.id) && itemDoCarrinho.size === 'M') {
+                desconto += (itemDoCarrinho.qt * 10)
             }
 
-            if(quartaFeira && pizzaPromoQuartaDois.includes(itemDoCarrinho.id)){
-                desconto += (itemDoCarrinho.qt * 11) 
+            if (quartaFeira && pizzaPromoQuartaDois.includes(itemDoCarrinho.id)) {
+                desconto += (itemDoCarrinho.qt * 11)
             }
         })
 
@@ -570,6 +570,15 @@ const carregarPizzas = () => {
     let grid = seleciona('.cards-grid');
     grid.innerHTML = '';
 
+    const promoSection = document.querySelector('.promocao');
+    if (promoSection && window.location.href.includes('card')) {
+        if (termoAtual !== '' || categoriaAtual !== 'all') {
+            promoSection.style.display = 'none';
+        } else {
+            promoSection.style.display = '';
+        }
+    }
+
     // Regra da Promoção
     const diaDaSemana = new Date().getDay();
     const quartaFeira = (diaDaSemana === 3);
@@ -620,7 +629,13 @@ const carregarPizzas = () => {
 
         // Ciclagem de cores (usa o index original para manter a consistência de cor da pizza)
         const cores = ['card-red', 'card-white', 'card-green'];
-        pizzaItem.classList.add(cores[index % 3]);
+        const cor = cores[index % 3];
+        pizzaItem.classList.add(cor);
+
+        if (cor === 'card-white') {
+            const btn = pizzaItem.querySelector('.card-btn');
+            if (btn) btn.classList.add('btn-outline');
+        }
 
         grid.append(pizzaItem);
         if (window.observeCard) window.observeCard(pizzaItem);
@@ -637,25 +652,25 @@ const carregarPizzas = () => {
             seleciona('.pizzaInfo--qt').innerHTML = quantPizzas;
             escolherTamanho(chave);
         });
-        
+
         botoesFechar();
     };
 
     // 1. Renderiza "Ofertas do Dia" primeiro (se existir promoção)
     if (pizzasPromo.length > 0) {
         // Verifica se alguma pizza de promo passou no filtro atual pra não colocar um H2 fantasma na tela
-        let temPromoPraMostrar = pizzasPromo.some(({item}) => {
+        let temPromoPraMostrar = pizzasPromo.some(({ item }) => {
             const catSlug = item.category.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
             return item.name.toLowerCase().includes(termoAtual.toLowerCase()) &&
-                   (categoriaAtual === 'all' || categoriaAtual === catSlug);
+                (categoriaAtual === 'all' || categoriaAtual === catSlug);
         });
 
         if (temPromoPraMostrar) {
             let tituloPromo = document.createElement('h2');
             tituloPromo.classList.add('category-title');
-            tituloPromo.innerHTML = "Ofertas do Dia"; 
+            tituloPromo.innerHTML = "Ofertas do Dia";
             grid.append(tituloPromo);
-            
+
             pizzasPromo.forEach(obj => desenharCard(obj, true));
         }
     }
@@ -668,6 +683,51 @@ const promocoes = () => {
 
 }
 
+const tratarParametrosURL = () => {
+    const params = new URLSearchParams(window.location.search);
+
+    // Tratamento de filtro
+    const filtroParams = params.get('filter');
+    if (filtroParams) {
+        let categoriaSlug = `pizzas-${filtroParams}`;
+        let botaoCorrespondente = [...selecionaTodos('.category-button')].find(b => b.getAttribute('data-filter') === categoriaSlug);
+
+        if (botaoCorrespondente) {
+            selecionaTodos('.category-button').forEach(b => b.classList.remove('active'));
+            botaoCorrespondente.classList.add('active');
+            categoriaAtual = categoriaSlug;
+            // Recarrega as pizzas com o filtro ativo
+            carregarPizzas();
+        }
+    }
+
+    // Tratamento de modal aberto direto
+    const modalParams = params.get('modal');
+    if (modalParams) {
+
+        let pizzaNomeBuscado = modalParams.replace(/-/g, ' ');
+        const normalizeStr = str => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        pizzaNomeBuscado = normalizeStr(pizzaNomeBuscado);
+
+        let indexAchado = pizzaJson.findIndex(item => {
+            let nomeItem = normalizeStr(item.name);
+            return nomeItem === pizzaNomeBuscado;
+        });
+
+        if (indexAchado > -1) {
+            let item = pizzaJson[indexAchado];
+            quantPizzas = 1;
+            modalKey = indexAchado;
+
+            abrirModal();
+            preencherDadosModal(item);
+            preencherTamanhos(indexAchado);
+            seleciona('.pizzaInfo--qt').innerHTML = quantPizzas;
+            escolherTamanho(indexAchado);
+        }
+    }
+}
+
 carregarPizzas()
 filtro()
 pesquisar()
@@ -677,3 +737,5 @@ adicionarNoCarrinho()
 atualizarCarrinho()
 fecharCarrinho()
 enviarPedido()
+tratarParametrosURL()
+

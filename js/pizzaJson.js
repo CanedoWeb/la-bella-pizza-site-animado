@@ -127,7 +127,7 @@ let pizzaJson = [
     {
         id: 14,
         category: 'Pizzas Tradicionais',
-        name: 'Frango c/ Catupiry',
+        name: 'Frango com Catupiry',
         img: 'assets/img/pizza brasileira.png',
         price: [62.90, 69.90, 86.90, 93.90],
         sizes: ['Média 30 cm', 'Grande 35 cm', 'Super 40 cm', 'Max 45 cm'],
