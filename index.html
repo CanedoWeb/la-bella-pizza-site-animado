@@ -371,6 +371,9 @@
                             </div>
                         </div>
                     </div>
+                    <p class="processo-text">
+                        Na La Bella Pizza, cada etapa importa. Nossa massa passa por <strong>48 horas de fermentação natural</strong>, garantindo leveza e sabor incomparáveis. Selecionamos <strong>ingredientes frescos</strong> diariamente de produtores locais da região serrana, e assamos tudo em <strong>forno a lenha</strong> artesanal — o segredo que faz da La Bella uma referência entre as pizzarias de Petrópolis.
+                    </p>
                 </div>
             </section>
 
@@ -379,6 +382,13 @@
                 <path id="stroke-path"
                     d="M4 6.47363L4 506.47363C119.427 1740.38 1920 538.291 1920 1789.97C1920 3025.01 27.9519 1855.75 1.5 2719.97C-36.1509 3911.62 2350.47 1658.28 1840.68 4692.9L1844.68 4672.54C1599.14 6507.05 110.088 5284.53 0.499836 6192.47C-122.468 7254.38 2243.5 5656.97 1856.35 7215.14C1683.97 7848.97 919 7618.97 0.999916 7618.97"
                     stroke="#AAD5A7" stroke-width="200" stroke-linecap="round" />
+            </svg>
+
+            <svg class="minhoquinha" viewBox="0 0 400 4600" fill="none" xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="none">
+                <path id="stroke-path-mob"
+                    d="M10 6L10 360C30 1020 400 300 390 1080C390 1740 10 1140 10 1680C10 2280 450 1260 380 2640L380 2616C330 3660 30 3060 10 3600C-10 4200 450 3360 380 4200C340 4500 190 4380 10 4380"
+                    stroke="#AAD5A7" stroke-width="120" stroke-linecap="round" />
             </svg>
 
 
@@ -430,9 +440,32 @@
                             <p>Basta navegar pelo nosso cardápio, clicar em "Pedir" na pizza desejada, escolher o tamanho e confirmar a quantidade. A pizza vai direto para o seu carrinho no canto superior direito. Ao terminar, clique no ícone do carrinho e em "Finalizar a compra".</p>
                         </div>
                     </div>
+                    <div class="faq-item">
+                        <button class="faq-question">Vocês aceitam cartão de crédito e Pix? <span class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Sim! Aceitamos Pix (pagamento instantâneo pelo celular), cartão de crédito e débito (levamos a maquininha até você) e também dinheiro. Escolha a forma de pagamento que preferir na hora de finalizar o pedido.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">Posso fazer reserva ou encomenda para eventos? <span class="faq-icon">+</span></button>
+                        <div class="faq-answer">
+                            <p>Claro! Atendemos encomendas para festas, confraternizações e eventos corporativos em Petrópolis e região. Entre em contato pelo nosso WhatsApp (24) 99932-3962 para combinar quantidades, sabores e horários.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <script>
+            document.querySelectorAll('.faq-question').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const item = btn.parentElement;
+                    const isActive = item.classList.contains('active');
+                    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                    if (!isActive) item.classList.add('active');
+                });
+            });
+        </script>
 
         <!-- JSON-LD para GEO/SEO -->
         <script type="application/ld+json">
@@ -459,6 +492,20 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "Nosso delivery funciona todos os dias, das 18h às 23h. Você pode pedir diretamente pelo nosso site ou através do nosso WhatsApp (24) 99932-3962."
+            }
+          }, {
+            "@type": "Question",
+            "name": "Vocês aceitam cartão de crédito e Pix?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sim! Aceitamos Pix, cartão de crédito e débito (levamos a maquininha até você) e também dinheiro."
+            }
+          }, {
+            "@type": "Question",
+            "name": "Posso fazer reserva ou encomenda para eventos?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Claro! Atendemos encomendas para festas, confraternizações e eventos corporativos em Petrópolis e região. Entre em contato pelo WhatsApp (24) 99932-3962."
             }
           }]
         }
@@ -506,6 +553,7 @@
 
     <script src="./js/slider.js"></script>
     <script src="./js/card-animation.js"></script>
+    <script src="./js/title-animation.js"></script>
     <script src="./js/svg-line.js"></script>
     <script src="./js/testimonials.js"></script>
     <script>

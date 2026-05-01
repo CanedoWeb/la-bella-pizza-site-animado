@@ -4,6 +4,8 @@
         width: 95%;
 
         .nav-container {
+            justify-content: space-between;
+
             .nav-link {
                 display: none;
             }
@@ -14,6 +16,14 @@
                 .logo {
                     height: 50px;
                 }
+            }
+
+            /* No cardápio.html usamos nav-actions */
+            .nav-actions {
+                order: 2;
+                display: flex;
+                align-items: center;
+                gap: 15px;
             }
 
             .nav-btn {
@@ -113,6 +123,7 @@
         .order-btn {
             order: 5;
             margin-bottom: 20px !important;
+            position: relative;
         }
 
         .hero-right {
@@ -226,18 +237,59 @@
 
     /* --- Redução de Distâncias entre Seções --- */
     .momento { padding: 40px 0 60px !important; }
-    .cardapio-container { padding: 60px 0 !important; }
+    .cardapio-container { padding: 20px 0 !important; }
     .sobre { padding: 60px 0 !important; }
     .clientes { padding: 60px 0 0 !important; }
     .sobre-cta { margin: 60px 0 !important; }
 
+    /* Ajuste para os botões de filtro no cardápio ficarem em linha e com scroll */
+    .category-buttons-box {
+        justify-content: flex-start !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        padding: 10px 20px !important;
+        gap: 15px !important;
+        width: 100% !important;
+        -webkit-overflow-scrolling: touch;
+        
+        /* Scrollbar visível para indicar movimento */
+        scrollbar-width: thin;
+        scrollbar-color: #DB4D44 #f3f3f3;
+        
+        &::-webkit-scrollbar {
+            height: 4px;
+        }
+        
+        &::-webkit-scrollbar-track {
+            background: #f3f3f3;
+            border-radius: 10px;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+            background: #DB4D44;
+            border-radius: 10px;
+        }
+
+        .category-button {
+            flex: 0 0 auto !important;
+            padding: 8px 20px !important;
+            font-size: 14px !important;
+        }
+    }
+
     /* --- Promoção Section --- */
     .promocao {
+        height: auto !important;
+        max-height: none !important;
+        min-height: auto !important;
+        padding: 90px 0 20px !important; /* padding-top alto para não ficar atrás do header fixo */
+        margin-bottom: 10px !important;
+    }
+
+    /* Caso seja a promoção da Home (que tem background), mantém 100vh */
+    .promocao:has(.promocao-bg) {
         height: 100vh !important;
         max-height: 100vh !important;
-        min-height: auto !important;
-        padding: 40px 0 !important;
-        margin-bottom: 20px !important;
     }
 
     .promocao-bg img {
@@ -337,10 +389,13 @@
         max-width: 100% !important;
     }
 
-    /* --- Correção da Linha SVG (Minhocão) --- */
-    .minhocao path {
-        vector-effect: non-scaling-stroke;
-        stroke-width: 40px !important; /* Espessura constante em pixels reais para celular */
+    /* --- SVG Lines: troca minhocão → minhoquinha no mobile --- */
+    .minhocao {
+        display: none !important;
+    }
+
+    .minhoquinha {
+        display: block !important;
     }
 
     /* --- Clientes (Depoimentos) --- */
@@ -363,5 +418,46 @@
 
     .testimonial-text {
         font-size: 14px !important;
+    }
+
+    /* --- Footer Mobile Adjustments --- */
+    .footer-container {
+        padding: 0 20px !important;
+    }
+
+    .footer-title {
+        font-size: 32px !important;
+        padding: 110px 0 30px !important; /* Aumentado para 110px para garantir que entre na área vermelha */
+    }
+
+    .footer-content .main {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+        padding-bottom: 30px !important;
+        text-align: center;
+    }
+
+    .footer-content .middle {
+        order: -1; /* Logo no topo no mobile */
+    }
+
+    .footer-content .left ul,
+    .footer-content .right ul {
+        align-items: center !important;
+    }
+
+    .footer-content .right {
+        align-items: center !important;
+    }
+
+    .footer-content .bottom {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 15px !important;
+        padding: 20px 0 !important;
+    }
+
+    .footer-content .bottom div {
+        justify-content: center !important;
     }
 }

@@ -624,6 +624,7 @@ const carregarPizzas = () => {
                 titulo.classList.add(categoriaSlug);
                 titulo.innerHTML = ultimaCategoria;
                 grid.append(titulo);
+                if (window.animateTitle) window.animateTitle(titulo);
             }
         }
 
