@@ -21,13 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        tlMob.to(pathMob, { strokeDashoffset: Lm * 0.90, ease: "none", duration: 10 })  // Conceito
-             .to(pathMob, { strokeDashoffset: Lm * 0.85, ease: "none", duration: 13 }) // Momento
-             .to(pathMob, { strokeDashoffset: Lm * 0.65, ease: "none", duration: 10 })  // Cardápio
-             .to(pathMob, { strokeDashoffset: Lm * 0.50, ease: "none", duration: 8 })  // Descida
-             .to(pathMob, { strokeDashoffset: Lm * 0.35, ease: "none", duration: 20 }) // Promoção
+        tlMob.to(pathMob, { strokeDashoffset: Lm * 0.90, ease: "none", duration: 18 })  // Conceito
+             .to(pathMob, { strokeDashoffset: Lm * 0.85, ease: "none", duration: 8 }) // Momento
+             .to(pathMob, { strokeDashoffset: Lm * 0.65, ease: "none", duration: 5 })  // Cardápio
+             .to(pathMob, { strokeDashoffset: Lm * 0.50, ease: "none", duration: 10 })  // Descida
+             .to(pathMob, { strokeDashoffset: Lm * 0.35, ease: "none", duration: 21 }) // Promoção
              .to(pathMob, { strokeDashoffset: Lm * 0.18, ease: "none", duration: 20 }) // Sobre
-             .to(pathMob, { strokeDashoffset: 0,          ease: "none", duration: 12 });// Final
+             .to(pathMob, { strokeDashoffset: 0,          ease: "none", duration: 11 });// Final
 
     } else {
         // DESKTOP — Anima o minhocão original

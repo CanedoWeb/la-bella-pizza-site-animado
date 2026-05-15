@@ -1537,9 +1537,8 @@ main {
     transform: translateX(-50%);
     width: 100%;
     /* Pode aumentar aqui livremente agora */
-    height: 96%;
-    /* IMPORTANTE: auto permite que a largura cresça sem travar na altura */
-    /* Garante que cubra a altura toda do wrap */
+    height: calc(96% - 150px);
+    /* Reduzido 150px para o SVG passar por trás dos cards */
     pointer-events: none;
     z-index: 0;
     overflow: hidden;
