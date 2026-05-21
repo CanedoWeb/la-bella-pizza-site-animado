@@ -1,10 +1,10 @@
 // SVGs das estrelas na ordem da bandeira italiana (sempre as 5, fixas)
 const STARS_HTML = `
     <img src="assets/img/image 344.svg" alt="estrela" class="star-svg">
-    <img src="assets/img/image 341.svg" alt="estrela" class="star-svg">
-    <img src="assets/img/image 343.svg" alt="estrela" class="star-svg">
-    <img src="assets/img/image 345.svg" alt="estrela" class="star-svg">
-    <img src="assets/img/image 342.svg" alt="estrela" class="star-svg">
+    <img src="assets/img/image 344.svg" alt="estrela" class="star-svg">
+    <img src="assets/img/image 344.svg" alt="estrela" class="star-svg">
+    <img src="assets/img/image 344.svg" alt="estrela" class="star-svg">
+    <img src="assets/img/image 344.svg" alt="estrela" class="star-svg">
 `;
 
 // Dados dos depoimentos
