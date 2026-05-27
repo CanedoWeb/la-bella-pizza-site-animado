@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/loader.css">
     <script>
         // Função para corrigir a altura real (100vh) no mobile sem que pule ao rolar a página
         function setVH() {
@@ -33,6 +34,33 @@
 </head>
 
 <body>
+    <!-- Global Cinematic Loader -->
+    <div id="global-loader">
+        <div class="loader-content">
+            <!-- SVG Simulating Pizza -->
+            <svg class="pizza-svg" viewBox="0 0 100 100">
+                <defs>
+                    <mask id="pizza-mask">
+                        <circle class="eat-circle" cx="50" cy="50" r="25" fill="none" stroke="white" stroke-width="50" stroke-dasharray="158" stroke-dashoffset="0" transform="rotate(-90 50 50)" />
+                    </mask>
+                </defs>
+                <g mask="url(#pizza-mask)">
+                    <!-- Fatias Triangulares (60 graus cada) -->
+                    <path d="M 50 50 L 50 2 A 48 48 0 0 1 91.569 26 Z" fill="#2a9d8f" />
+                    <path d="M 50 50 L 91.569 26 A 48 48 0 0 1 91.569 74 Z" fill="#e63946" />
+                    <path d="M 50 50 L 91.569 74 A 48 48 0 0 1 50 98 Z" fill="#2a9d8f" />
+                    <path d="M 50 50 L 50 98 A 48 48 0 0 1 8.431 74 Z" fill="#e63946" />
+                    <path d="M 50 50 L 8.431 74 A 48 48 0 0 1 8.431 26 Z" fill="#2a9d8f" />
+                    <path d="M 50 50 L 8.431 26 A 48 48 0 0 1 50 2 Z" fill="#e63946" />
+                    
+                    <!-- Borda (crosta da pizza) na cor original laranja -->
+                    <circle cx="50" cy="50" r="46" fill="none" stroke="#ff9f1c" stroke-width="8" />
+                </g>
+            </svg>
+            <img src="assets/img/logo.webp" alt="La Bella Pizza" class="loader-logo">
+        </div>
+    </div>
+
     <header class="header">
         <nav class="nav-container">
             <a href="#inicio" class="nav-link">Início</a>
@@ -574,6 +602,7 @@
         });
     </script>
     <script src="js/promo-slider.js"></script>
+    <script src="js/loader.js"></script>
 </body>
 
 </html>

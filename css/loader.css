@@ -1,0 +1,54 @@
+/* loader.css */
+#global-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #FAF8F5; /* Fundo off-white elegante e clean */
+    z-index: 999999; /* Fica acima de TUDO no site */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+    overflow: hidden;
+}
+
+/* Classe aplicada via JS para remover o loader suavemente */
+#global-loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Container relativo para centralizar animações */
+.loader-content {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* SVG da Pizza */
+.pizza-svg {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+}
+
+/* O círculo de máscara que vai consumir a pizza ao girar */
+.eat-circle {
+    /* A circunferência de um círculo de raio 25 é 2 * PI * 25 = 157.08 */
+    stroke-dasharray: 158;
+    stroke-dashoffset: 0; /* Começa com a máscara cheia (mostra tudo) */
+}
+
+/* Logo do Loader */
+.loader-logo {
+    width: 200px; /* Logo grande */
+    height: auto;
+    position: absolute;
+    opacity: 0; /* Começa invisível */
+    transform: scale(0); /* Começa microscópica */
+}
