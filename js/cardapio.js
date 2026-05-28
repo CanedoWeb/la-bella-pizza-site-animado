@@ -204,6 +204,14 @@ const fecharCarrinho = () => {
             }
         }
     })
+
+    // 3. Fechar pelo botão de pedir mais pizzas
+    const pedirMaisBtn = seleciona('.cart--pedirmais')
+    if (pedirMaisBtn) {
+        pedirMaisBtn.addEventListener('click', () => {
+            seleciona('aside').classList.remove('show')
+        })
+    }
 }
 
 const adicionarNoCarrinho = () => {
@@ -247,7 +255,7 @@ const atualizarCarrinho = () => {
     let total = 0
 
     let diaDaSemana = new Date().getDay()
-    let quartaFeira = (diaDaSemana === 3)
+    let quartaFeira = (diaDaSemana === 4)
 
     if (cart.length > 0) {
         seleciona('aside').classList.add('show')
@@ -479,7 +487,7 @@ const configurarCheckout = () => {
 
         let mensagemFinal = encodeURIComponent(mensagem)
 
-        let url = `https://wa.me/24999323962?text=${mensagemFinal}`
+        let url = `https://wa.me/5524999887348?text=${mensagemFinal}`
 
         window.open(url, '_blank')
 
@@ -581,7 +589,7 @@ const carregarPizzas = () => {
 
     // Regra da Promoção
     const diaDaSemana = new Date().getDay();
-    const quartaFeira = (diaDaSemana === 3);
+    const quartaFeira = (diaDaSemana === 4); // Definido como 4 (Quinta) para você testar hoje
 
     // Listas separadas
     let pizzasPromo = [];
@@ -642,6 +650,18 @@ const carregarPizzas = () => {
         if (window.observeCard) window.observeCard(pizzaItem);
 
         preencheDadosPizza(pizzaItem, item, index);
+
+        if (ehPromoSection) {
+            let precoBase = item.price[0];
+            if (pizzaPromoQuartaUm.includes(item.id)) {
+                precoBase -= 10;
+            } else if (pizzaPromoQuartaDois.includes(item.id)) {
+                precoBase -= 11;
+            }
+
+            // Atualiza apenas visualmente o valor exibido na vitrine de ofertas
+            pizzaItem.querySelector(".card-price").innerHTML = `R$ ${precoBase.toFixed(2).replace('.', ',')}`;
+        }
 
         // Ação do clique para abrir o Modal
         pizzaItem.querySelector('.card-btn').addEventListener('click', (e) => {

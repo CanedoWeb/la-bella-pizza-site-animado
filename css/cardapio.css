@@ -590,6 +590,23 @@ aside.show {
     box-shadow: 0px 10px 25px rgba(100, 185, 95, 0.5);
 }
 
+.cart--pedirmais {
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    color: #888;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.cart--pedirmais:hover {
+    color: #dc4e44;
+    text-decoration: underline;
+}
+
 @media (max-width: 840px) {
     aside {
         width: auto;
@@ -624,8 +641,8 @@ aside.show {
     }
 
     .pizzaWindowBody {
-        width: 100%;
-        margin: 0;
+        width: calc(100% - 30px);
+        margin: 0 auto;
         border-radius: 25px;
         padding: 25px;
         padding-top: 50px;
