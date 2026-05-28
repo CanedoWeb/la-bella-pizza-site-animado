@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         // Dispara corações flutuando de forma super suave e lenta ("floaty" effect)
-        for (let i = 0; i < 7; i++) {
+        for (let i = 0; i < 4; i++) {
             const heart = document.createElement("div");
             heart.className = "heart-particle";
             heart.innerText = "❤️";
@@ -135,17 +135,18 @@ document.addEventListener("DOMContentLoaded", () => {
             
             // Movimento flutuante mais lento, suave e de maior amplitude
             gsap.to(heart, {
-                y: -100 - Math.random() * 90,
-                x: (Math.random() * 100 - 50),
-                scale: 0.7 + Math.random() * 0.8,
-                rotation: Math.random() * 80 - 40,
+                y: -60 - Math.random() * 40,
+                x: (Math.random() * 60 - 30),
+                scale: 0.8 + Math.random() * 0.4,
+                rotation: Math.random() * 60 - 30,
                 opacity: 0,
-                duration: 1.2 + Math.random() * 0.5, // Mais lento e flutuante
+                duration: 0.5,
+                delay: i * 0.12, // um coração de cada vez
                 ease: "power1.out",
                 onComplete: () => heart.remove()
             });
         }
-    }, 1100);
+    }, 950);
 
     setupLinkClickAnimation("link-website", (btn) => {
         // --- MOTION WEBSITE (Globo Rotativo) ---
