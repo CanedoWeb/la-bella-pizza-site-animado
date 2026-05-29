@@ -602,9 +602,22 @@ aside.show {
     margin-top: 15px;
 }
 
-.cart--pedirmais:hover {
+.cart--pedirmais:hover,
+.cart--limpar:hover {
     color: #dc4e44;
     text-decoration: underline;
+}
+
+.cart--limpar {
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    color: #888;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 15px;
 }
 
 @media (max-width: 840px) {
@@ -637,18 +650,21 @@ aside.show {
     .pizzaWindowArea {
         align-items: center;
         justify-content: center;
-        padding: 5vh 15px;
+        padding: 15px;
     }
 
     .pizzaWindowBody {
-        width: calc(100% - 30px);
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
         margin: 0 auto;
-        border-radius: 25px;
-        padding: 25px;
-        padding-top: 50px;
-        /* Espaço pro botão mobile */
-        max-height: 90vh;
+        border-radius: 20px;
+        padding: 20px;
+        padding-top: 40px;
+        max-height: 95vh;
         overflow-y: auto;
+        overflow-x: hidden;
+        gap: 15px;
     }
 
     .pizzaInfo--cancelButton {
@@ -657,21 +673,58 @@ aside.show {
 
     .pizzaInfo--cancelMobileButton {
         display: block;
+        top: 15px;
+        left: 15px;
     }
 
     .pizzaBig img {
-        height: 200px;
+        height: 160px;
+    }
+
+    .pizzaInfo h1 {
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+
+    .pizzaInfo--desc {
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+
+    .pizzaInfo--sizes {
+        gap: 5px;
+        margin-bottom: 15px;
+    }
+
+    .pizzaInfo--size {
+        padding: 8px 5px;
+        font-size: 11px;
+    }
+
+    .pizzaInfo--size span {
+        font-size: 10px;
     }
 
     .pizzaInfo--pricearea {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+
+    .pizzaInfo--actualPrice {
+        font-size: 26px;
     }
 
     .pizzaInfo--qtarea {
-        align-self: flex-end;
-        margin-top: -50px;
+        align-self: center;
+        margin-top: 0;
+        height: 40px;
+    }
+
+    .pizzaInfo--addButton {
+        padding: 12px 15px;
+        font-size: 14px;
     }
 }
 

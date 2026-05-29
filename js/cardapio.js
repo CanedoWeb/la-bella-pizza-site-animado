@@ -109,22 +109,24 @@ const pegarKey = (e) => {
 }
 
 const preencherTamanhos = (key) => {
-    seleciona('.pizzaInfo--size.selected').classList.remove('selected')
+    let currentSelected = seleciona('.pizzaInfo--size.selected')
+    if (currentSelected) currentSelected.classList.remove('selected')
 
     selecionaTodos('.pizzaInfo--size').forEach((size, sizeIndex) => {
         if (pizzaJson[key].sizes[sizeIndex]) {
             size.style.display = 'block'
             size.querySelector('span').innerHTML = pizzaJson[key].sizes[sizeIndex]
-
-            if (sizeIndex == 0) {
-                size.classList.add('selected')
-            }
-
         } else {
             size.style.display = 'none'
         }
     })
 
+    let allSizes = selecionaTodos('.pizzaInfo--size')
+    if (pizzaJson[key].sizes[1]) {
+        allSizes[1].classList.add('selected')
+    } else {
+        allSizes[0].classList.add('selected')
+    }
 }
 
 const atualizaPreco = () => {
@@ -134,6 +136,17 @@ const atualizaPreco = () => {
     //uas modalkey pq senao ia ter que botar parametro key, inclusive podia ter usado menos parametro key
     //e mais modalkey
     let precoBase = pizzaJson[modalKey].price[sizeIndex]
+
+    let diaDaSemana = new Date().getDay()
+    let quartaFeira = (diaDaSemana === 4)
+
+    if (quartaFeira && sizeIndex === 1) {
+        if (pizzaPromoQuartaUm.includes(pizzaJson[modalKey].id)) {
+            precoBase -= 10
+        } else if (pizzaPromoQuartaDois.includes(pizzaJson[modalKey].id)) {
+            precoBase -= 11
+        }
+    }
 
     let total = precoBase * quantPizzas
 
@@ -302,12 +315,12 @@ const atualizarCarrinho = () => {
 
             subtotal += itemDoCarrinho.qt * itemDoCarrinho.price
 
-            if (quartaFeira && pizzaPromoQuartaUm.includes(itemDoCarrinho.id) && itemDoCarrinho.size === 'M') {
-                desconto += (itemDoCarrinho.qt * 10)
-            }
-
-            if (quartaFeira && pizzaPromoQuartaDois.includes(itemDoCarrinho.id)) {
-                desconto += (itemDoCarrinho.qt * 11)
+            if (quartaFeira && itemDoCarrinho.size === 'M') {
+                if (pizzaPromoQuartaUm.includes(itemDoCarrinho.id)) {
+                    desconto += (itemDoCarrinho.qt * 10)
+                } else if (pizzaPromoQuartaDois.includes(itemDoCarrinho.id)) {
+                    desconto += (itemDoCarrinho.qt * 11)
+                }
             }
         })
 
@@ -326,8 +339,13 @@ const atualizarCarrinho = () => {
 const capturarDadosDoPedido = () => {
     let pedido = {
         itens: [],
+        subtotal: 0,
+        desconto: 0,
         total: 0
     }
+
+    let diaDaSemana = new Date().getDay()
+    let quartaFeira = (diaDaSemana === 4)
 
     cart.forEach((itemDoCarrinho) => {
 
@@ -351,8 +369,18 @@ const capturarDadosDoPedido = () => {
             }
         )
 
-        pedido.total += pizzaTotal
+        pedido.subtotal += pizzaTotal
+
+        if (quartaFeira && itemDoCarrinho.size === 'M') {
+            if (pizzaPromoQuartaUm.includes(itemDoCarrinho.id)) {
+                pedido.desconto += (itemDoCarrinho.qt * 10)
+            } else if (pizzaPromoQuartaDois.includes(itemDoCarrinho.id)) {
+                pedido.desconto += (itemDoCarrinho.qt * 11)
+            }
+        }
     })
+    
+    pedido.total = pedido.subtotal - pedido.desconto
     return pedido
 }
 
@@ -472,6 +500,11 @@ const configurarCheckout = () => {
             mensagem += `🍕 ${item.nome} (${item.tamanho}) - ${item.quantidade}x - ${formatoReal(item.totalPizza)}\n`
         })
 
+        if (pedido.desconto > 0) {
+            mensagem += `\nSubtotal: ${formatoReal(pedido.subtotal)}`
+            mensagem += `\nDesconto promocional: -${formatoReal(pedido.desconto)}`
+        }
+
         mensagem += `\n💰 Total do pedido: ${formatoReal(pedido.total)}\n`
 
         // 3.4 Injetando os dados da entrega no final do bilhete
@@ -487,7 +520,7 @@ const configurarCheckout = () => {
 
         let mensagemFinal = encodeURIComponent(mensagem)
 
-        let url = `https://wa.me/5524999887348?text=${mensagemFinal}`
+        let url = `https://wa.me/5524999323962?text=${mensagemFinal}`
 
         window.open(url, '_blank')
 
@@ -505,6 +538,17 @@ const enviarPedido = () => {
         }
     })
     configurarCheckout()
+}
+
+const limparCarrinho = () => {
+    const btnLimpar = seleciona('.cart--limpar')
+    if (btnLimpar) {
+        btnLimpar.addEventListener('click', () => {
+            cart = []
+            seleciona('.menu-openner span').innerHTML = 0
+            atualizarCarrinho()
+        })
+    }
 }
 
 const pesquisar = () => {
@@ -652,7 +696,7 @@ const carregarPizzas = () => {
         preencheDadosPizza(pizzaItem, item, index);
 
         if (ehPromoSection) {
-            let precoBase = item.price[0];
+            let precoBase = item.price[1] || item.price[0];
             if (pizzaPromoQuartaUm.includes(item.id)) {
                 precoBase -= 10;
             } else if (pizzaPromoQuartaDois.includes(item.id)) {
@@ -672,6 +716,7 @@ const carregarPizzas = () => {
             preencherTamanhos(chave);
             seleciona('.pizzaInfo--qt').innerHTML = quantPizzas;
             escolherTamanho(chave);
+            atualizaPreco();
         });
 
         botoesFechar();
@@ -758,5 +803,6 @@ adicionarNoCarrinho()
 atualizarCarrinho()
 fecharCarrinho()
 enviarPedido()
+limparCarrinho()
 tratarParametrosURL()
 
